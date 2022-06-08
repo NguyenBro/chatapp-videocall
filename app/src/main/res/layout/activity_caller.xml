@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A2A2A"
+    tools:context=".UI.CallerActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/caller_avatar"
+        android:layout_width="233dp"
+        android:layout_height="233dp"
+        android:layout_marginTop="88dp"
+        android:src="@drawable/image_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/caller_decline"
+        android:layout_width="112dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="496dp"
+        android:src="@drawable/image_decline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNameCaller"
+        android:layout_width="199dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:text="Nguyen"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caller_avatar" />
+
+    <ImageView
+        android:id="@+id/imageViewCallerBack"
+        android:layout_width="48dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_white_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

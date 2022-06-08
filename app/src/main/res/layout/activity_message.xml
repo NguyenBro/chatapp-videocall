@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CACACA"
+    tools:context=".UI.MessageActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="413dp"
+            android:layout_height="73dp"
+            android:background="#025AF3"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageViewBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/ic_baseline_arrow_back_white_24" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView_Avatar_Message"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/imageViewBack"
+                    android:src="@drawable/image_avatar" />
+
+                <TextView
+                    android:id="@+id/textViewName_Message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_toEndOf="@id/imageView_Avatar_Message"
+                    android:text="Name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/imageViewMeeting"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="205dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toEndOf="@id/imageView_Avatar_Message"
+                    android:src="@drawable/ic_baseline_video_call_white_24" />
+
+                <ImageView
+                    android:id="@+id/imageViewInfoUser"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="255dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@id/imageView_Avatar_Message"
+                    android:src="@drawable/ic_baseline_info_24" />
+            </RelativeLayout>
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewMessage"
+        android:layout_width="410dp"
+        android:layout_height="530dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/bottom"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="5dp"
+        android:background="#fff"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewAudio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_baseline_keyboard_voice_24" />
+
+        <ImageView
+            android:id="@+id/imageViewCamera"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/imageViewAudio"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
+
+        <ImageView
+            android:id="@+id/imageViewImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imageViewCamera"
+            app:srcCompat="@drawable/ic_baseline_attach_file_24" />
+
+        <EditText
+            android:id="@+id/edittextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/imageViewSend"
+            android:layout_toRightOf="@id/imageViewImage"
+            android:drawablePadding="5dp"
+            android:hint="Type a message..." />
+
+        <ImageView
+            android:id="@+id/imageViewSend"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_baseline_send_24" />
+
+        <ImageView
+            android:id="@+id/imageViewCancelImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="332dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_baseline_highlight_off_red24" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@null"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+<!--<com.google.android.material.appbar.AppBarLayout-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="parent">-->
+
+<!--<androidx.appcompat.widget.Toolbar-->
+<!--    android:id="@+id/toolbar"-->
+<!--    android:layout_width="413dp"-->
+<!--    android:layout_height="85dp"-->
+<!--    android:background="#0022FF"-->
+<!--    android:minHeight="?attr/actionBarSize"-->
+<!--    android:theme="?attr/actionBarTheme"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintHorizontal_bias="0.0"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent">-->
+
+
+<!--</androidx.appcompat.widget.Toolbar>-->
+
+<!--<de.hdodenhof.circleimageview.CircleImageView-->
+<!--    android:id="@+id/imageView_Avatar_Message"-->
+<!--    android:layout_width="68dp"-->
+<!--    android:layout_height="64dp"-->
+<!--    android:layout_marginStart="52dp"-->
+<!--    android:layout_marginTop="10dp"-->
+<!--    android:src="@drawable/image_main_bottom"-->
+<!--    app:layout_constraintStart_toStartOf="@+id/toolbar"-->
+<!--    app:layout_constraintTop_toTopOf="@+id/toolbar"-->
+
+<!--    />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/textViewName_Message"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginStart="24dp"-->
+<!--    android:layout_marginTop="28dp"-->
+<!--    android:text="Name"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:textSize="20sp"-->
+
+<!--    app:layout_constraintStart_toEndOf="@+id/imageView_Avatar_Message"-->
+<!--    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--<View-->
+<!--    android:id="@+id/view"-->
+<!--    android:layout_width="409dp"-->
+<!--    android:layout_height="71dp"-->
+<!--    android:background="@color/white"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintHorizontal_bias="0.0"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    app:layout_constraintVertical_bias="0.998" />-->
+
+<!--<EditText-->
+<!--    android:id="@+id/edittextMessage"-->
+<!--    android:layout_width="323dp"-->
+<!--    android:layout_height="52dp"-->
+<!--    android:layout_marginStart="16dp"-->
+<!--    android:layout_marginTop="12dp"-->
+<!--    android:ems="10"-->
+<!--    android:hint="Type a Message"-->
+<!--    android:inputType="textPersonName"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="@+id/view" />-->
+
+<!--<ImageView-->
+<!--    android:id="@+id/imageViewSend"-->
+<!--    android:layout_width="50dp"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:layout_marginEnd="12dp"-->
+<!--    app:layout_constraintBottom_toBottomOf="@+id/view"-->
+<!--    app:layout_constraintEnd_toEndOf="@+id/view"-->
+<!--    app:layout_constraintTop_toTopOf="@+id/view"-->
+<!--    app:srcCompat="@drawable/ic_baseline_send_24" />-->
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--    android:id="@+id/recycleViewMessage"-->
+<!--    android:layout_width="410dp"-->
+<!--    android:layout_height="502dp"-->
+<!--    app:layout_constraintBottom_toBottomOf="@+id/view"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintHorizontal_bias="1.0"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
+<!--    app:layout_constraintVertical_bias="0.0" />-->

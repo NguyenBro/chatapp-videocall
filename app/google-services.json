@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297919525719",
+    "project_id": "chatapp-videocall",
+    "storage_bucket": "chatapp-videocall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297919525719:android:feafd4840ccd9f46db8412",
+        "android_client_info": {
+          "package_name": "net.jitsi.sdktest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297919525719-l98o6hbuj28chsgej3ou4295uf9gm12n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.jitsi.sdktest",
+            "certificate_hash": "2e9417a132792095bdfbd6890c2e7740950e103c"
+          }
+        },
+        {
+          "client_id": "297919525719-40eahmsto1oj81teal0l4nilo810ri02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIrkmqW8oQhk1teUiq1U2ymNFrOfGMqPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297919525719-40eahmsto1oj81teal0l4nilo810ri02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
