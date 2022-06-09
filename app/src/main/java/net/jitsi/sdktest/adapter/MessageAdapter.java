@@ -207,10 +207,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         //Hiện thị status của tin nhắn : xem hay chưa xem
         if(position==listChat.size()-1){
             if(chat.isIsseen()){
-                holder.txt_seen.setText("Seen");
+                holder.txt_seen.setText(context.getResources().getString(R.string.seen));
             }
             else{
-                holder.txt_seen.setText("Delivered");
+                holder.txt_seen.setText(context.getResources().getString(R.string.delivered));
             }
         }
         else{

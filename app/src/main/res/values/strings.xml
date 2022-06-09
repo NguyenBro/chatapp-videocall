@@ -5,14 +5,67 @@
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="reset">Reset Password</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_send_again">SendAgainActivity</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_send_again" translatable="false">SendAgainActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="file">File</string>
+    <string name="image">Image</string>
+    <string name="video" translatable="false">Video</string>
+    <string name="more">More</string>
+    <string name="profile">Profile</string>
+    <string name="phone">Phone:</string>
+    <string name="birthdate">BirthDate:</string>
+    <string name="gender">Gender:</string>
+    <string name="current_add">Current Add:</string>
+    <string name="home">Home:</string>
+    <string name="don_t_have_an_account">Don\'t have an Account?</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_in2">Sign In</string>
+    <string name="add_number_phone">Add Number Phone</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="phoneotp">You will receive an OTP verification code from a text message on your phone number</string>
+    <string name="continuee">Continue</string>
+    <string name="sendagain">Send</string>
+    <string name="find">Find...</string>
+    <string name="username">UserName</string>
+    <string name="sign_up2">Sign Up</string>
+    <string name="copy">Copy</string>
+    <string name="forward">Forward</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="name">Name</string>
+    <string name="search">Search...</string>
+    <string name="join">Join</string>
+    <string name="create_room">Create Room</string>
+    <string name="code_meeting">Code Meeting</string>
+    <string name="contacts">Contacts</string>
+    <string name="all_users">All Users</string>
+    <string name="send">Send</string>
+    <string name="logout">Logout</string>
+    <string name="information">Information</string>
+    <string name="messeger">Messeger</string>
+    <string name="user">User</string>
+    <string name="me">Profile</string>
+    <string name="meeting1">Meeting</string>
+    <string name="seen">Seen</string>
+    <string name="delivered">Delivered</string>
+    <string name="cannot">You can not send empty message</string>
+    <string name="granted">Permission Granted</string>
+    <string name="denied">Permission Denied</string>
+    <string name="error_camera">Camera error</string>
+    <string name="error_image">Error Save image</string>
+    <string name="start_audio">Recording started</string>
+    <string name="done">Done</string>
+
+
 </resources>

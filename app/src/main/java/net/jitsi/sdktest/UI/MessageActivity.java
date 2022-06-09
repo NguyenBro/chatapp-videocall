@@ -197,7 +197,7 @@ public class MessageActivity extends AppCompatActivity {
                     sendMessage(firebaseUser.getUid(),userid,msg);
                 }
                 else{
-                    Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.cannot), Toast.LENGTH_SHORT).show();
                 }
                 edtSend.setText("");
 //                edtSend.requestFocus();
@@ -465,7 +465,7 @@ public class MessageActivity extends AppCompatActivity {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(MessageActivity.this, "Lỗi Lưu ảnh", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.error_image), Toast.LENGTH_SHORT).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -761,10 +761,10 @@ public class MessageActivity extends AppCompatActivity {
                             PackageManager.PERMISSION_GRANTED;
 
                     if (StoragePermission && RecordPermission) {
-                        Toast.makeText(MessageActivity.this, "Permission Granted",
+                        Toast.makeText(MessageActivity.this, getResources().getString(R.string.granted),
                                 Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(MessageActivity.this, "Permission Denied",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MessageActivity.this, getResources().getString(R.string.denied),Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -774,7 +774,7 @@ public class MessageActivity extends AppCompatActivity {
                     startActivityForResult(intent,REQUEST_CODE_CAMERA);
                 }
                 else{
-                    Toast.makeText(this, "Lỗi Camera", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.error_camera), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -936,7 +936,7 @@ public class MessageActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Toast.makeText(MessageActivity.this, "Recording started",
+            Toast.makeText(MessageActivity.this, getResources().getString(R.string.start_audio),
                     Toast.LENGTH_LONG).show();
         } else {
             requestPermission();
@@ -964,7 +964,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
                     Uri downloadUrl = task.getResult();
-                    Toast.makeText(MessageActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.done), Toast.LENGTH_SHORT).show();
                     //firebaseUser.getUid(),userid
                     Log.d("BBB",downloadUrl.toString());
                     hashMap.put("sender",firebaseUser.getUid());

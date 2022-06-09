@@ -30,9 +30,9 @@ public class FileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file);
 
         tabLayoutList =new ArrayList<>();
-        tabLayoutList.add("Image");
-        tabLayoutList.add("Video");
-        tabLayoutList.add("File");
+        tabLayoutList.add(getResources().getString(R.string.image));
+        tabLayoutList.add(getResources().getString(R.string.video));
+        tabLayoutList.add(getResources().getString(R.string.file));
         mTabLayout = findViewById(R.id.tabLayout);
         mViewPage = findViewById(R.id.viewPage);
         imgBack = findViewById(R.id.imageView7);

@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import net.jitsi.sdktest.R;
 
@@ -29,7 +32,9 @@ public class PhoneActivity extends AppCompatActivity {
     ImageView imgBack;
     Button btnCountinue;
     EditText edtPhone;
+    FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,9 @@ public class PhoneActivity extends AppCompatActivity {
         btnCountinue = findViewById(R.id.buttonCountinue);
         edtPhone =findViewById(R.id.editTextInputPhone);
         mAuth =FirebaseAuth.getInstance();
+        firebaseUser =FirebaseAuth.getInstance().getCurrentUser();
+        String id = firebaseUser.getUid();
+        reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/").getReference("Users").child(id);
 
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -54,10 +62,13 @@ public class PhoneActivity extends AppCompatActivity {
                     Toast.makeText(PhoneActivity.this, "Enter Phone", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    VertifyPhone("+84"+edtPhone.getText().toString());
+                    reference.child("phone").setValue("+84"+edtPhone.getText().toString());
+                    finish();
+                    //VertifyPhone("+84"+edtPhone.getText().toString());
 //                    Intent intent = new Intent(PhoneActivity.this,EnterOTPActivity.class);
 //                    intent.putExtra("numberphone",edtPhone.getText().toString());
 //                    startActivity(intent);
+
                 }
 
             }

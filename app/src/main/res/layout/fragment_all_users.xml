@@ -16,7 +16,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/custom_edittext_search"
         android:drawableStart="@drawable/ic_baseline_search_24"
-        android:hint="Search..."
+        android:hint="@string/search"
         android:paddingStart="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView

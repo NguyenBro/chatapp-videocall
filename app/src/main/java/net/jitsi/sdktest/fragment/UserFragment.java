@@ -35,8 +35,8 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_user, container, false);
         tabLayoutList =new ArrayList<>();
-        tabLayoutList.add("Contacts");
-        tabLayoutList.add("All Users");
+        tabLayoutList.add(getResources().getString(R.string.contacts));
+        tabLayoutList.add(getResources().getString(R.string.all_users));
         mTabLayout = view.findViewById(R.id.tabLayout1);
         mViewPage = view.findViewById(R.id.viewPage1);
 

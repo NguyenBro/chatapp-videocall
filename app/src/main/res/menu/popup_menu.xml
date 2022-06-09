@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/information_user"
-        android:title="Information"
+        android:title="@string/information"
 
         />
 
     <item
         android:id="@+id/image_file"
-        android:title="File"
+        android:title="@string/file"
         />
 
 </menu>

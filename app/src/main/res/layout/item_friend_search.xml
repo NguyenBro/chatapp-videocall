@@ -34,7 +34,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/custoem_text_view"
-        android:text="Send"
+        android:text="@string/send"
         android:textColor="#2B2A2A"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

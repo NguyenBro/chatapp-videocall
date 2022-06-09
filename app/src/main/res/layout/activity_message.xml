@@ -61,18 +61,19 @@
                     android:id="@+id/imageViewMeeting"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="205dp"
                     android:layout_marginTop="18dp"
-                    android:layout_toEndOf="@id/imageView_Avatar_Message"
+                    android:layout_marginEnd="60dp"
+                    android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_baseline_video_call_white_24" />
 
                 <ImageView
                     android:id="@+id/imageViewInfoUser"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="255dp"
                     android:layout_marginTop="20dp"
-                    android:layout_toEndOf="@id/imageView_Avatar_Message"
+                    android:layout_marginEnd="15dp"
                     android:src="@drawable/ic_baseline_info_24" />
             </RelativeLayout>
 
@@ -115,8 +116,8 @@
             android:id="@+id/imageViewCamera"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_toRightOf="@id/imageViewAudio"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imageViewAudio"
             app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
 
         <ImageView

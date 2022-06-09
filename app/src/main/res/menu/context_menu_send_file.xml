@@ -4,18 +4,18 @@
 
     <item
         android:id="@+id/send_image"
-        android:title="Image"
+        android:title="@string/image"
 
         />
 
     <item
         android:id="@+id/send_video"
-        android:title="Video"
+        android:title="@string/video"
         />
 
     <item
         android:id="@+id/send_file"
-        android:title="File"
+        android:title="@string/file"
         />
 
 
