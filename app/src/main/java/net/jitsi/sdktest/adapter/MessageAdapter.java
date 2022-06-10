@@ -1,10 +1,12 @@
 package net.jitsi.sdktest.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +63,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CountDownTimer countDownTimer;
         Chat chat = listChat.get(position);
         holder.show_message.setText(chat.getMessage());     //Show tin nhắn
@@ -74,133 +76,120 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Picasso.get().load(imageurl).into(holder.profile_image);
         }
 
-        //Kiểm tra loại tin nhắn
-        if(chat.getType().equals("default")){
-            //Tin nhắn chỉ là chữ
-            holder.imgChat.setVisibility(View.GONE);
-            if(chat.getMessage().equals(":D")){
+        switch (chat.getType()){
+            case "default":
+                holder.imgChat.setVisibility(View.GONE);
+                holder.video.setVisibility(View.GONE);
+                if(chat.getMessage().equals(":D")){
 
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen,R.drawable.image_smiling);
-            }
-            else if(chat.getMessage().equals(":v")){
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_smile);
-            }
-            else if(chat.getMessage().equals(":(") || chat.getMessage().equals(":((") ){
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_sad);
-            }
-            else if(chat.getMessage().equals(":)") || chat.getMessage().equals(":))") ){
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_smile_heart);
-            }
-            else if(chat.getMessage().equals("<3") ){
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_heart);
-            }
-            else if(chat.getMessage().equals(":<") ){
-                showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_angry);
-            }
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen,R.drawable.image_smiling);
+                }
+                else if(chat.getMessage().equals(":v")){
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_smile);
+                }
+                else if(chat.getMessage().equals(":(") || chat.getMessage().equals(":((") ){
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_sad);
+                }
+                else if(chat.getMessage().equals(":)") || chat.getMessage().equals(":))") ){
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_smile_heart);
+                }
+                else if(chat.getMessage().equals("<3") ){
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_heart);
+                }
+                else if(chat.getMessage().equals(":<") ){
+                    showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen, R.drawable.image_angry);
+                }
+                break;
+            case "image":
+                holder.imgChat.setVisibility(View.VISIBLE);
+                holder.imgEmotion.setVisibility(View.GONE);
+                Picasso.get().load(chat.getLink()).into(holder.imgChat);
+                RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.BELOW, R.id.imageViewBody);
+                params.addRule(RelativeLayout.ALIGN_PARENT_END);
+                holder.txt_seen.setLayoutParams(params);
+                //Chỉnh lại các rules cho hình ảnh
+                if(chat.getMessage().equals("")){
+                    holder.show_message.setVisibility(View.GONE);
+                    RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(580,800);
+                    if(firebaseUser.getUid().equals(chat.getSender())) {
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                    }else{
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                        params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                        params1.setMargins(10,0,0,0);
 
+                    }
+                    holder.imgChat.setLayoutParams(params1);
+                }
+                break;
 
-        }else if(chat.getType().equals("image")){
-            //Tin nhắn bao gồm hình ảnh
-            Picasso.get().load(chat.getLink()).into(holder.imgChat);
-            RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.BELOW, R.id.imageViewBody);
-            params.addRule(RelativeLayout.ALIGN_PARENT_END);
-            holder.txt_seen.setLayoutParams(params);
-            //Chỉnh lại các rules cho hình ảnh
-            if(chat.getMessage().equals("")){
+            case "video":
+                RelativeLayout.LayoutParams paramss= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                paramss.addRule(RelativeLayout.BELOW, R.id.videoViewBody);
+                paramss.addRule(RelativeLayout.ALIGN_PARENT_END);
+                holder.txt_seen.setLayoutParams(paramss);
+
+                //Chỉnh lại rules
+                if(chat.getMessage().equals("")){
+                    RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(700,700);
+                    holder.show_message.setVisibility(View.GONE);
+                    if(firebaseUser.getUid().equals(chat.getSender())) {
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                    }else{
+                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                        params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                        params1.setMargins(10,0,0,0);
+                    }
+                    holder.video.setLayoutParams(params1);
+                }else{
+                    RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(700,700);
+                    if(firebaseUser.getUid().equals(chat.getSender())) {
+                        params2.addRule(RelativeLayout.BELOW,R.id.show_message);
+                        params2.addRule(RelativeLayout.ALIGN_PARENT_END);
+                    }else{
+                        params2.addRule(RelativeLayout.BELOW,R.id.show_message);
+                        params2.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                        //params2.addRule(RelativeLayout.ALIGN_PARENT_START);
+                        //params2.setMargins(10,0,0,0);
+                    }
+                    params2.setMargins(0,6,0,0);
+                    holder.video.setLayoutParams(params2);
+
+                }
+
+                //Chạy video
+                holder.video.setVideoURI(Uri.parse(chat.getLink()));
+                holder.video.requestFocus();
+                holder.video.setVisibility(View.VISIBLE);
+                //holder.video.start();
+
+                break;
+            case "file":
+                holder.show_message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_archive_24, 0, 0, 0);
+                break;
+            case "audio":
+                holder.imgChat.setVisibility(View.GONE);
                 holder.show_message.setVisibility(View.GONE);
-                RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(530,530);
-                if(firebaseUser.getUid().equals(chat.getSender())) {
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);
-                }else{
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
-                    params1.setMargins(10,0,0,0);
+                holder.seekBar.setVisibility(View.VISIBLE);
+                holder.imgPlay.setVisibility(View.VISIBLE);
+                //holder.imgPause.setVisibility(View.VISIBLE);
 
-                }
-                holder.imgChat.setLayoutParams(params1);
-            }
-        }
-        else if(chat.getType().equals("video")){
-            //Tin nhắn bao gồm video
-            holder.imgChat.setVisibility(View.GONE);
-            holder.imgEmotion.setVisibility(View.GONE);
+                RelativeLayout.LayoutParams paramsss= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                paramsss.addRule(RelativeLayout.BELOW, R.id.seekBarPlay);
+                paramsss.addRule(RelativeLayout.ALIGN_PARENT_END);
+                holder.txt_seen.setLayoutParams(paramsss);
 
-            RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.BELOW, R.id.videoViewBody);
-            params.addRule(RelativeLayout.ALIGN_PARENT_END);
-            holder.txt_seen.setLayoutParams(params);
+                //Lấy uri của audio
+                Uri uri = Uri.parse(chat.getLink());
+                holder.mp = MediaPlayer.create(context, uri);
+                int duration = holder.mp.getDuration();
+                holder.seekBar.setMax(duration);
+                break;
 
-            //Chỉnh lại rules
-            if(chat.getMessage().equals("")){
-                RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(700,700);
-                holder.show_message.setVisibility(View.GONE);
-                if(firebaseUser.getUid().equals(chat.getSender())) {
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);
-                }else{
-                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
-                    params1.setMargins(10,0,0,0);
-                }
-                holder.video.setLayoutParams(params1);
-            }else{
-                RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(700,700);
-                if(firebaseUser.getUid().equals(chat.getSender())) {
-                    params2.addRule(RelativeLayout.BELOW,R.id.show_message);
-                    params2.addRule(RelativeLayout.ALIGN_PARENT_END);
-                }else{
-                    params2.addRule(RelativeLayout.BELOW,R.id.show_message);
-                    params2.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
-                    //params2.addRule(RelativeLayout.ALIGN_PARENT_START);
-                    //params2.setMargins(10,0,0,0);
-                }
-                params2.setMargins(0,6,0,0);
-                holder.video.setLayoutParams(params2);
 
-            }
-
-            //Chạy video
-            holder.video.setVideoURI(Uri.parse(chat.getLink()));
-            holder.video.requestFocus();
-            holder.video.setVisibility(View.VISIBLE);
-            //holder.video.start();
-//            CountDownTimer countDownTimer =new CountDownTimer(3000,1000) {
-//                @Override
-//                public void onTick(long l) {
-//
-//                }
-//
-//                @Override
-//                public void onFinish() {
-//                    holder.video.pause();
-//                }
-//            }.start();
-
-        }
-        else if(chat.getType().equals("file")){
-            //Tin nhắn bao gồm file
-            holder.imgChat.setVisibility(View.GONE);
-            holder.show_message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_archive_24, 0, 0, 0);
-        }else if(chat.getType().equals("audio")){
-            //Tin nhắn bao gồm audio
-            holder.imgChat.setVisibility(View.GONE);
-            holder.show_message.setVisibility(View.GONE);
-            holder.seekBar.setVisibility(View.VISIBLE);
-            holder.imgPlay.setVisibility(View.VISIBLE);
-            //holder.imgPause.setVisibility(View.VISIBLE);
-
-            RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.BELOW, R.id.seekBarPlay);
-            params.addRule(RelativeLayout.ALIGN_PARENT_END);
-            holder.txt_seen.setLayoutParams(params);
-
-            //Lấy uri của audio
-            Uri uri = Uri.parse(chat.getLink());
-            holder.mp = MediaPlayer.create(context, uri);
-            int duration = holder.mp.getDuration();
-            holder.seekBar.setMax(duration);
 
         }
 
@@ -262,6 +251,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("INDEX", chat.getType());
+            }
+        });
+
         holder.video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,20 +297,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         });
 
-//        holder.video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
-//                float screenRatio = holder.video.getWidth() / (float)
-//                        holder.video.getHeight();
-//                float scaleX = videoRatio / screenRatio;
-//                if (scaleX >= 1f) {
-//                    holder.video.setScaleX(scaleX);
-//                } else {
-//                    holder.video.setScaleY(1f / scaleX);
-//                }
-//            }
-//        });
+
     }
 
     @Override
