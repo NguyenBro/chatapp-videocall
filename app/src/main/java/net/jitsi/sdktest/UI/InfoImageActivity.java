@@ -5,6 +5,8 @@ import android.app.DownloadManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -36,6 +38,8 @@ public class InfoImageActivity extends AppCompatActivity {
     public static String start ="";
     String url;
     DatabaseReference reference;
+    private ScaleGestureDetector scaleGestureDetector;
+    private float mScaleFactor = 1.0f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class InfoImageActivity extends AppCompatActivity {
         imgMore = findViewById(R.id.imageView11);
         txtName = findViewById(R.id.textViewName_Image);
         txtStatus = findViewById(R.id.textViewStatus_Image);
+        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
         url = getIntent().getStringExtra("url");
         Picasso.get().load(url).into(imgBody);
@@ -93,6 +98,23 @@ public class InfoImageActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        scaleGestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
+            imgBody.setScaleX(mScaleFactor);
+            imgBody.setScaleY(mScaleFactor);
+            return true;
+        }
     }
 
     //Lựa chọn tải ảnh hoặc gửi ảnh cho người khác

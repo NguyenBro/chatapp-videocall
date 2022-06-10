@@ -76,6 +76,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Picasso.get().load(imageurl).into(holder.profile_image);
         }
 
+        //Kiểm tra loại tin nhắn, để hiện thị
         switch (chat.getType()){
             case "default":
                 holder.imgChat.setVisibility(View.GONE);

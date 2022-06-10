@@ -167,9 +167,9 @@ public class ContactsFragment extends Fragment {
                         phoneNo = phoneNo.replaceAll(" ", "");  //Xóa khoảng cách giữa các chữ số
                         char[] s = phoneNo.toCharArray();
                         if(Character.compare(s[0],'0')==0){
-                            phoneNo = "+84"+ phoneNo.substring(1,phoneNo.length()-1);           //Chuyển sang định dạng +84...
+                            phoneNo = "+84"+ phoneNo.substring(1,phoneNo.length());           //Chuyển sang định dạng +84...
                         }
-                        //Log.d("BBB"," name :" + phoneNo.trim() + " phone: "+ phoneNo + " " + phoneNo.length());
+                        //Log.d("BBB"," name :" + name + " phone: "+ phoneNo + " " + phoneNo.length());
                         numberPhone.add(phoneNo);
                     }
                     pCur.close();
