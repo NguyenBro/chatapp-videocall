@@ -62,6 +62,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CountDownTimer countDownTimer;
@@ -123,6 +124,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
                     }
                     holder.imgChat.setLayoutParams(params1);
+                    //holder.imgChat.setBackground(context.getResources().getDrawable(R.drawable.custom_image));
+                    //holder.imgChat.setClipToOutline(true);
                 }
                 break;
 
@@ -196,6 +199,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         //Hiện thị status của tin nhắn : xem hay chưa xem
         if(position==listChat.size()-1){
+            if(chat.getSender().equals(firebaseUser.getUid())){
+                holder.txt_seen.setVisibility(View.VISIBLE);
+            }
             if(chat.isIsseen()){
                 holder.txt_seen.setText(context.getResources().getString(R.string.seen));
             }
@@ -252,12 +258,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("INDEX", chat.getType());
-            }
-        });
+
 
         holder.video.setOnClickListener(new View.OnClickListener() {
             @Override

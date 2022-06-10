@@ -33,7 +33,7 @@
     <string name="name">Tên</string>
     <string name="search">Tìm kiếm</string>
     <string name="join">Tham Gia</string>
-    <string name="create_room">Tạp Phòng</string>
+    <string name="create_room">Tạo Phòng</string>
     <string name="code_meeting">Mã phòng họp</string>
     <string name="contacts">Danh bạ</string>
     <string name="all_users">Tất cả</string>
