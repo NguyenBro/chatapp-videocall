@@ -20,8 +20,9 @@
         android:background="@drawable/background_left"
         android:padding="8dp"
         android:text="Hello"
+        android:textColor="#5B5B5B"
         android:textSize="18sp"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
 
     <ImageView
@@ -65,6 +66,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_send"
         android:text="seen"
+        android:textColor="#050505"
         android:visibility="gone"
         android:layout_below="@id/show_message"
 

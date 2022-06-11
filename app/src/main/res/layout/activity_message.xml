@@ -133,6 +133,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColorHint="#545454"
+            android:textColor="#050505"
             android:layout_toLeftOf="@id/imageViewSend"
             android:layout_toRightOf="@id/imageViewImage"
             android:drawablePadding="5dp"

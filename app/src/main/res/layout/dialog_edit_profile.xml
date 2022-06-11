@@ -27,8 +27,10 @@
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="@string/name"
+        android:textColorHint="#545454"
+        android:textColor="#050505"
         android:inputType="textPersonName"
-        android:padding="8dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
@@ -40,6 +42,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:text="@string/cancel"
+        android:textColor="#050505"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBody" />
@@ -51,6 +54,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:text="@string/save"
+        android:textColor="#050505"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBody" />
