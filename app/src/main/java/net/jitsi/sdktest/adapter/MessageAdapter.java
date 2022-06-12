@@ -44,12 +44,12 @@ import java.util.List;
 
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    public static final int MSG_TYPE_LEFT=0;
-    public static final int MSG_TYPE_RIGHT=1;
+    public static final int MSG_TYPE_LEFT=0;        //Tin nhắn nằm bên trái
+    public static final int MSG_TYPE_RIGHT=1;       //Tin nhắn nằm bên phải
     private MessageActivity context;
     private List<Chat> listChat;
     private String imageurl;
-    FirebaseUser firebaseUser;
+    FirebaseUser firebaseUser;                      //Lấy User khi đăng nhập thành công từ FireBase
     public MessageAdapter(MessageActivity context, List<Chat> mChat, String img){
         this.context = context;
         this.listChat = mChat;
@@ -61,10 +61,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Kiểm tra tin nhắn của sender hay receiver
         if(viewType==MSG_TYPE_RIGHT) {
+            //Nếu tin nhắn từ chính mình ==> Nằm bên phải
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_right, parent, false);
             return new ViewHolder(view);
         }
         else{
+            //Nhược lại tin nhắn nhận đc, thì nằm bên trái
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_left, parent, false);
             return new ViewHolder(view);
         }
@@ -74,7 +76,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CountDownTimer countDownTimer;
-        Chat chat = listChat.get(position);
+        Chat chat = listChat.get(position);         //Lấy vị trí tin nhắn từ Array
         holder.show_message.setText(chat.getMessage());     //Show tin nhắn
         //showw avatar
         if(imageurl.equals("default")){
@@ -90,6 +92,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             case "default":
                 holder.imgChat.setVisibility(View.GONE);
                 holder.video.setVisibility(View.GONE);
+
+                //Kiểm tra và hiện thi Các Icon
                 if(chat.getMessage().equals(":D")){
 
                     showIcon(holder.show_message,holder.imgEmotion,holder.txt_seen,R.drawable.image_smiling);
@@ -113,29 +117,33 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             case "image":
                 holder.imgChat.setVisibility(View.VISIBLE);
                 holder.imgEmotion.setVisibility(View.GONE);
+                //Lấy kích thước màn hình, để fix kích thước cho image
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 context.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 int heightScreen = displayMetrics.heightPixels;
                 int widthScreen = displayMetrics.widthPixels;
+                //Load image và lấy kích thước hiện tại của ImageView , xử dựng Bất Đồng Bộ để trả về kết quả
                 Target target;
                 Picasso.get().load(chat.getLink())
                     .into(target = new Target() {
-
-
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            //Lấy kích thước hình ảnh
                             int height = bitmap.getHeight();
                             int width = bitmap.getWidth();
                             Log.d("LOAD: ", height+" "+width);
 
+                            //Xử lý tỉ lệ hình ảnh khi hiện ra màn hình
                             float percent = height/(float)width;
-                            int widthScale = (int) Math.round(widthScreen * 0.7);
-                            int heightScale =(int) Math.round(widthScreen * 0.7 * percent * 0.95);
+                            int widthScale = (int) Math.round(widthScreen * 0.7);       //Chiều rộng tấm hình sau khi được điều chỉnh
+                            int heightScale =(int) Math.round(widthScreen * 0.7 * percent * 0.95);      //Chiều cao sau khi được điều chỉnh
+
+                            //Sửa lại Rules
                             RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                             params.addRule(RelativeLayout.BELOW, R.id.imageViewBody);
                             params.addRule(RelativeLayout.ALIGN_PARENT_END);
                             holder.txt_seen.setLayoutParams(params);
-                            //Chỉnh lại các rules cho hình ảnh
+                            //Chỉnh lại các rules cho hình ảnh, với kích thước đã được tính từ trên
                             RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(widthScale,heightScale);
                             //holder.imgChat.setImageBitmap(bitmap);
 
@@ -144,11 +152,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                                 //SizeImage sizeImage = getSizeImage(holder.imgChat);
                                 //Log.d("SIZEIAMGE",sizeImage.getHeight() + " " + sizeImage.getWidth());
                                 if(firebaseUser.getUid().equals(chat.getSender())) {
-                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);       //Top
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);       //Right
                                 }else{
-                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);       //Top
+                                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);   //Nằm bên phải Avatar
                                     params1.setMargins(10,0,0,0);
 
                                 }
@@ -157,14 +165,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                                 if(firebaseUser.getUid().equals(chat.getSender())) {
                                     params1.addRule(RelativeLayout.BELOW,R.id.show_message);
                                     params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                                    params1.setMargins(0,10,0,0);
                                 }else{
                                     params1.addRule(RelativeLayout.BELOW,R.id.show_message);
                                     params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
-                                    params1.setMargins(10,0,0,0);
+                                    params1.setMargins(10,10,0,0);
 
                                 }
                             }
                             holder.imgChat.setLayoutParams(params1);
+                            //Chỉnh cho imageView được bo 4 góc
                             holder.imgChat.setBackground(context.getResources().getDrawable(R.drawable.custom_image));
                             holder.imgChat.setClipToOutline(true);
 
@@ -193,6 +203,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
                 //Chỉnh lại rules
                 if(chat.getMessage().equals("")){
+                    //Với Video không kèm theo tin nhắn text
                     RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(700,700);
                     holder.show_message.setVisibility(View.GONE);
                     if(firebaseUser.getUid().equals(chat.getSender())) {
@@ -205,6 +216,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     }
                     holder.video.setLayoutParams(params1);
                 }else{
+                    //Gửi video kèm với text
                     RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(700,700);
                     if(firebaseUser.getUid().equals(chat.getSender())) {
                         params2.addRule(RelativeLayout.BELOW,R.id.show_message);
@@ -220,7 +232,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
                 }
 
-                //Chạy video
+                //Chạy video, từ Urri
                 holder.video.setVideoURI(Uri.parse(chat.getLink()));
                 holder.video.requestFocus();
                 holder.video.setVisibility(View.VISIBLE);
@@ -228,6 +240,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
                 break;
             case "file":
+                //Chỉnh lại giao diện khi tin nhắn có gửi File tài liệu
                 holder.show_message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_archive_24, 0, 0, 0);
                 break;
             case "audio":
@@ -364,12 +377,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView show_message;
-        public ImageView profile_image;
-        public  TextView txt_seen;
+        public TextView show_message;       //Tin nhắn text
+        public ImageView profile_image;     //Image Âvatar
+        public  TextView txt_seen;          //Tin nhắn thông báo 'xem' hay 'chưa xem'
         public ImageView imgChat,imgPlay,imgPause,imgEmotion;
-        public SeekBar seekBar;
-        public VideoView video;
+        public SeekBar seekBar;             //Seek Bar để chạy Audio
+        public VideoView video;             //Video
         public MediaPlayer mp;
         public MediaController mediaController =new MediaController(context);
         public ViewGroup wrapperView = new RelativeLayout(context);

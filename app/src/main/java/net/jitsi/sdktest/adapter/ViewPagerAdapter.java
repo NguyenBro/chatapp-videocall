@@ -10,7 +10,7 @@ import net.jitsi.sdktest.fragment.FileFragment;
 import net.jitsi.sdktest.fragment.ImageFileFragment;
 import net.jitsi.sdktest.fragment.VideoFileFragment;
 
-
+//Hiện thị TabLayout , Khi xem các file đã gửi gồm : File tài liệu, File hình ảnh và File Video
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
 

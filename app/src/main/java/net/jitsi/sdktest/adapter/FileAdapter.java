@@ -18,11 +18,12 @@ import net.jitsi.sdktest.R;
 import java.util.List;
 
 
+//Chứa các Icon File, dùng để hiện thị từng item File
 
 public class FileAdapter extends BaseAdapter {
     private Context context;
     private  int layout;
-    private List<File> listNameFile;
+    private List<File> listNameFile;        //Mảng chứa danh sách các file tài liệu
 
     public FileAdapter(Context context, int layout, List<File> listImage) {
         this.context = context;
@@ -71,16 +72,18 @@ public class FileAdapter extends BaseAdapter {
         }
         File file = listNameFile.get(i);
         holder.txtFileName.setText(file.getName());
+
+        //Khi click vào item File này sẽ hiện 1 Dialog tải file
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Download File");
-                builder.setMessage("Do you want to download file "+ file.getName()+ " ?");
+                builder.setTitle("Download File");              //Title Download
+                builder.setMessage("Do you want to download file "+ file.getName()+ " ?");      //Message Download
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        downloadFile(Uri.parse(file.getUrlFile()),file.getName());
+                        downloadFile(Uri.parse(file.getUrlFile()),file.getName());              //Function Download ,truyền vào Urri File
 
                     }
                 });
@@ -100,6 +103,7 @@ public class FileAdapter extends BaseAdapter {
 
         return view;
     }
+    //DownLoad File từ Urri
     public void downloadFile(Uri uri,String filename) {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri)

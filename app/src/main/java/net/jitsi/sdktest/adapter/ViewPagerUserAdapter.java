@@ -9,7 +9,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import net.jitsi.sdktest.fragment.AllUsersFragment;
 import net.jitsi.sdktest.fragment.ContactsFragment;
 
-
+//TablAYOUT với Contacts : Các User từ danh bạ
+//All User chứa tất cả các User
 public class ViewPagerUserAdapter extends FragmentStateAdapter  {
 
     public ViewPagerUserAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

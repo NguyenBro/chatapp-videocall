@@ -48,9 +48,11 @@
 
     <EditText
         android:id="@+id/editTextMail_SignUp"
-        android:layout_width="362dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/custom_edittext_login"
         android:drawableLeft="@drawable/ic_baseline_email_24"
         android:drawablePadding="10dp"
@@ -84,9 +86,11 @@
 
     <EditText
         android:id="@+id/editTextUserName_SignUp"
-        android:layout_width="361dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginTop="316dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/custom_edittext_login"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="10dp"
@@ -102,9 +106,11 @@
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/custom_button_login"
         android:text="@string/sign_up2"
         android:textAllCaps="false"
@@ -144,10 +150,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:layout_height="wrap_content"
-        android:textColorHint="#545454"
         android:textColor="#050505"
+        android:textColorHint="#545454"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +164,7 @@
 
         <EditText
             android:id="@+id/editTextPassword_SignUp"
-            android:layout_width="361dp"
+            android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@drawable/custom_edittext_login"
             android:drawableStart="@drawable/ic_baseline_lock_24"
@@ -165,12 +173,13 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="15sp"
-            android:textColorHint="#545454"
             android:textColor="#050505"
+            android:textColorHint="#545454"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.58"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextMail_SignUp"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>

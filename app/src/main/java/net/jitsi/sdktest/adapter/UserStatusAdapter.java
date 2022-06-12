@@ -20,7 +20,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+//Hiện thị các Usser đang hoạt động
 public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.ViewHolder> {
 
     private Context context;

@@ -21,7 +21,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+//Adapter Item về các User , khi ta tìm kiếm theo tin
 public class SearchAdapter extends BaseAdapter  {
     private SendAgainActivity context;
     private  int layout;
@@ -84,10 +84,12 @@ public class SearchAdapter extends BaseAdapter  {
             Picasso.get().load(user.getImageURL()).into(holder.imgAvatar);
         }
 
+        //Chọn gửi lại tin nhắn cho User đó
         holder.txtSend.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                //Gửi lại Message
                 context.sendMessage(user.getId());
                 Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
             }

@@ -32,11 +32,11 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+//Adapter chứa để hiện thị lịc sử các User mà đã gửi tin nhắn
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context context;
     private List<User> listUser;
-    private boolean isChat;
+    private boolean isChat;     //Kiểm tra tin nhắn đã xem hay chưa
     String theLastMessage;
     public UserAdapter(Context context,List<User> mUser,boolean isChat){
         this.context = context;
@@ -55,6 +55,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = listUser.get(position);
         holder.userName.setText(user.getUsername());
+
+        //Load Avaater
         if(user.getImageURL().equals("default")){
             holder.profile_image.setImageResource(R.drawable.image_avatar);
         }
@@ -62,14 +64,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Picasso.get().load(user.getImageURL()).into(holder.profile_image);
         }
 
+        //Kiểm tra tin nhắn đã được đọc chưa
         if(isChat){
-            Log.d("TTT","last");
+            //Nếu chưa đọc , ta hiện lên tin nhắn, cùng với các kí hiệu
             lastMessage(user.getId(), holder.last_message,holder.img_newmessage,holder.userName,holder.last_message,holder.textViewTime);
         }
         else{
+            //Nếu đã đọc thì ẩn đi các biểu tượng đó
             holder.last_message.setVisibility(View.GONE);
         }
 
+        //Kiểm tra trạng thái hoạt động
         if(isChat){
             if(user.getStatus().equals("online")){
                 holder.img_onl.setVisibility(View.VISIBLE);
@@ -127,18 +132,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
     }
 
+    //Hiện tin nhắn cuối cùng ở ngoài lịch sử trò chuyện
     private void lastMessage(String userid, TextView last_msg,CircleImageView img_checkMessage,TextView username,TextView last_message,TextView time){
+        //Kiểm tra về User nhờ hàm bên Firebase
         if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
-            Log.d("TTT", "1");
-            theLastMessage = "default";
-            String id;
+            theLastMessage = "default";  //Nội dung tin nhắn cuối
+            String id;                      //Id của người trò chuyện
             final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            //Khai báo node "CHATS" từ FireBase
             DatabaseReference reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/").getReference("Chats");
             id = firebaseUser.getUid();
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.d("TTT", firebaseUser.getUid());
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Chat chat = data.getValue(Chat.class);
 
@@ -170,7 +176,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
 
                     }
-
+                    //Kiểm tra nếu không có tin nhắn cuối thì set No Message
                     switch (theLastMessage) {
                         case "default":
                             last_msg.setText("No Message");
@@ -180,7 +186,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                             break;
                     }
                     theLastMessage = "default";
-                    Log.d("TTTC", last_msg.getWidth() +"");
                     last_msg.setMaxWidth(550);
 
 
@@ -195,6 +200,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 }
             });
 
+            //Thời gian của tin nhắn cuối cùng
             DatabaseReference referencecChatlist = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/").getReference("Chatlist").child(id);
             referencecChatlist.addValueEventListener(new ValueEventListener() {
                 @Override
