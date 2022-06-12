@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -194,10 +195,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Đến Từ");
+                txt.setText(getResources().getString(R.string.current_add));
+                edt.setHint(getResources().getString(R.string.current_add));
+                edt.setHintTextColor(Color.GRAY);
                 if(!local.getText().toString().equals("default")) {
                     edt.setText(local.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -230,10 +234,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Sống Tại");
+                txt.setText(getResources().getString(R.string.home));
+                edt.setHint(getResources().getString(R.string.home));
+                edt.setHintTextColor(Color.GRAY);
                 if(!home.getText().toString().equals("default")) {
                     edt.setText(home.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -265,10 +272,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Giới Tính");
+                txt.setText(getResources().getString(R.string.gender));
+                edt.setHint(getResources().getString(R.string.gender));
+                edt.setHintTextColor(Color.GRAY);
                 if(!gender.getText().toString().equals("default")) {
                     edt.setText(gender.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -300,10 +310,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Ngày Sinh");
+                txt.setText(getResources().getString(R.string.birthdate));
+                edt.setHint(getResources().getString(R.string.birthdate));
+                edt.setHintTextColor(Color.GRAY);
                 if(!birth.getText().toString().equals("default")) {
                     edt.setText(birth.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

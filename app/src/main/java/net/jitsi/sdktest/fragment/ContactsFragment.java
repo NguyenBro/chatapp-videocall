@@ -170,7 +170,11 @@ public class ContactsFragment extends Fragment {
                             phoneNo = "+84"+ phoneNo.substring(1,phoneNo.length());           //Chuyển sang định dạng +84...
                         }
                         //Log.d("BBB"," name :" + name + " phone: "+ phoneNo + " " + phoneNo.length());
-                        numberPhone.add(phoneNo);
+                        //Log.d("PHONE_SSS",phoneNo +" " + numberPhone.size() +"");
+                        if(!numberPhone.contains(phoneNo)){
+                            numberPhone.add(phoneNo);
+                        }
+
                     }
                     pCur.close();
                 }
