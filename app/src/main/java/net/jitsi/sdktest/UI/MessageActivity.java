@@ -370,7 +370,7 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-
+    //Chọn file,image,video
     private void showPopupMenuSendFile(){
         PopupMenu popupMenu =new PopupMenu(MessageActivity.this,imgImage);
         popupMenu.getMenuInflater().inflate(R.menu.context_menu_send_file,popupMenu.getMenu());

@@ -3,13 +3,17 @@ package net.jitsi.sdktest.adapter;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
@@ -21,16 +25,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.api.LogDescriptor;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import net.jitsi.sdktest.Model.Chat;
+import net.jitsi.sdktest.Model.SizeImage;
 import net.jitsi.sdktest.R;
 import net.jitsi.sdktest.UI.InfoImageActivity;
 import net.jitsi.sdktest.UI.InfoVideoActivity;
 import net.jitsi.sdktest.UI.MessageActivity;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -105,28 +113,76 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             case "image":
                 holder.imgChat.setVisibility(View.VISIBLE);
                 holder.imgEmotion.setVisibility(View.GONE);
-                Picasso.get().load(chat.getLink()).into(holder.imgChat);
-                RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.BELOW, R.id.imageViewBody);
-                params.addRule(RelativeLayout.ALIGN_PARENT_END);
-                holder.txt_seen.setLayoutParams(params);
-                //Chỉnh lại các rules cho hình ảnh
-                if(chat.getMessage().equals("")){
-                    holder.show_message.setVisibility(View.GONE);
-                    RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(580,800);
-                    if(firebaseUser.getUid().equals(chat.getSender())) {
-                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                        params1.addRule(RelativeLayout.ALIGN_PARENT_END);
-                    }else{
-                        params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                        params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
-                        params1.setMargins(10,0,0,0);
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                context.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int heightScreen = displayMetrics.heightPixels;
+                int widthScreen = displayMetrics.widthPixels;
+                Target target;
+                Picasso.get().load(chat.getLink())
+                    .into(target = new Target() {
 
-                    }
-                    holder.imgChat.setLayoutParams(params1);
-                    //holder.imgChat.setBackground(context.getResources().getDrawable(R.drawable.custom_image));
-                    //holder.imgChat.setClipToOutline(true);
-                }
+
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            int height = bitmap.getHeight();
+                            int width = bitmap.getWidth();
+                            Log.d("LOAD: ", height+" "+width);
+
+                            float percent = height/(float)width;
+                            int widthScale = (int) Math.round(widthScreen * 0.7);
+                            int heightScale =(int) Math.round(widthScreen * 0.7 * percent * 0.95);
+                            RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                            params.addRule(RelativeLayout.BELOW, R.id.imageViewBody);
+                            params.addRule(RelativeLayout.ALIGN_PARENT_END);
+                            holder.txt_seen.setLayoutParams(params);
+                            //Chỉnh lại các rules cho hình ảnh
+                            RelativeLayout.LayoutParams params1= new RelativeLayout.LayoutParams(widthScale,heightScale);
+                            //holder.imgChat.setImageBitmap(bitmap);
+
+                            if(chat.getMessage().equals("")){
+                                holder.show_message.setVisibility(View.GONE);
+                                //SizeImage sizeImage = getSizeImage(holder.imgChat);
+                                //Log.d("SIZEIAMGE",sizeImage.getHeight() + " " + sizeImage.getWidth());
+                                if(firebaseUser.getUid().equals(chat.getSender())) {
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                                }else{
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                                    params1.setMargins(10,0,0,0);
+
+                                }
+
+                            }else{
+                                if(firebaseUser.getUid().equals(chat.getSender())) {
+                                    params1.addRule(RelativeLayout.BELOW,R.id.show_message);
+                                    params1.addRule(RelativeLayout.ALIGN_PARENT_END);
+                                }else{
+                                    params1.addRule(RelativeLayout.BELOW,R.id.show_message);
+                                    params1.addRule(RelativeLayout.RIGHT_OF,R.id.profile_image_chat);
+                                    params1.setMargins(10,0,0,0);
+
+                                }
+                            }
+                            holder.imgChat.setLayoutParams(params1);
+                            holder.imgChat.setBackground(context.getResources().getDrawable(R.drawable.custom_image));
+                            holder.imgChat.setClipToOutline(true);
+
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                            Log.d("FAILE", "Load");
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                            Log.d("Pre", "Load");
+                        }
+                    });
+                Picasso.get().load(chat.getLink()).into(holder.imgChat);
+                holder.imgChat.setTag(target);
+
                 break;
 
             case "video":
@@ -180,7 +236,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 holder.seekBar.setVisibility(View.VISIBLE);
                 holder.imgPlay.setVisibility(View.VISIBLE);
                 //holder.imgPause.setVisibility(View.VISIBLE);
-
+                //Neo Seen vao SeekBar
                 RelativeLayout.LayoutParams paramsss= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                 paramsss.addRule(RelativeLayout.BELOW, R.id.seekBarPlay);
                 paramsss.addRule(RelativeLayout.ALIGN_PARENT_END);
@@ -214,7 +270,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
 
 
-        //event click vào video
+        //event click vào audio
         holder.imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -332,6 +388,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    //lOC TIN NHAN, AI GỬI , AI NHẬN
     @Override
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -353,4 +410,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         params.addRule(RelativeLayout.ALIGN_PARENT_END);
         seen.setLayoutParams(params);
     }
+
+
+
 }
