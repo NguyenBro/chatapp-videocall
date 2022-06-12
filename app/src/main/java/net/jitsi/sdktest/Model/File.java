@@ -1,8 +1,9 @@
 package net.jitsi.sdktest.Model;
 
+//Lưu file tài liệu
 public class File {
-    private String name;
-    private String urlFile;
+    private String name;        //Tên của tập file
+    private String urlFile;     //Link Uri từ Firebase
 
     public File(String name, String urlFile) {
         this.name = name;

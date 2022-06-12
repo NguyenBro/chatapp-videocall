@@ -1,15 +1,15 @@
 package net.jitsi.sdktest.Model;
 
 import java.io.Serializable;
-
+//Các biến để xử lý các sự kiện từ tin nhắn Chat
 public class Chat implements Serializable {
-    private String id;
-    private String sender;
-    private  String receiver;
-    private String message;
-    private String link;
-    private boolean isseen;
-    private String type;
+    private String id;      //ID tin nhắn, được tạo ngẫu nhiên từ Firebase
+    private String sender;  //Người gửi
+    private  String receiver;       //Người nhận
+    private String message;         //Nội dung tin nhắn text
+    private String link;            //Link Uri nếu có
+    private boolean isseen;         //Tin nhắn đã được xem hay chưa xem
+    private String type;            //Loại tệp đính kèm : Hình ảnh, video, audio, file document
 
     public Chat(String sender, String receiver, String message,boolean isseen,String image,String type) {
         this.sender = sender;

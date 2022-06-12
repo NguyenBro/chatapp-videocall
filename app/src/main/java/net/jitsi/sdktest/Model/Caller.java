@@ -1,7 +1,8 @@
 package net.jitsi.sdktest.Model;
 
+//Chứa Id của người gọi
 public class Caller {
-    private String caller;
+    private String caller; //ID Người gọi
 
     public Caller() {
     }

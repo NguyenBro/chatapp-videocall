@@ -1,18 +1,19 @@
 package net.jitsi.sdktest.Model;
 
+//Lưu thông tin User
 public class User {
-    private String id;
-    private String username;
-    private String email;
-    private String phone;
-    private String imageURL;
-    private String birthDate;
-    private String gender;
-    private String home;
-    private String local;
-    private String status;
-    private String search;
-    private String isMeet;
+    private String id;          //Id audto do FireBase tạo
+    private String username;    //Tên
+    private String email;       //Email tạo
+    private String phone;       //Số ddiejn thoại
+    private String imageURL;       //Link Uri hình ảnh Avatar
+    private String birthDate;       //Ngày Sinh
+    private String gender;      //Giới tính
+    private String home;        //Địa chỉ
+    private String local;       //Sống tại
+    private String status;      //Trạng thái hoạt động
+    private String search;      //Viết thường username để search
+    private String isMeet;      //Trạng thái tham gia cuộc họp
 
     public User() {
     }

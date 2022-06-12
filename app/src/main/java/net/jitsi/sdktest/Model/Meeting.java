@@ -1,10 +1,11 @@
 package net.jitsi.sdktest.Model;
 
+//Cuộc họp
 public class Meeting {
-    private String roomID;
-    private String time;
-    private String status;
-    private boolean isNow;
+    private String roomID;  //ID Room
+    private String time;       //Thời gian tạo phòng
+    private String status;      //Trạng thái phòng
+    private boolean isNow;      //Tình trạng phòng hiện tại : đang diễn ra hay đã off
 
     public Meeting(String roomID, String time, String status, boolean isNow) {
         this.roomID = roomID;

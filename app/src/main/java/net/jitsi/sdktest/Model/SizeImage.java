@@ -1,5 +1,5 @@
 package net.jitsi.sdktest.Model;
-
+//Lưu kích thước hình ảnh
 public class SizeImage {
     private int width;
     private int height;
