@@ -72,18 +72,22 @@ public class MainChatAppActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.navigation_messeger:
+                        //Chứa tin nhắn
                         fragment = new MessageFragment();
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_users:
+                        //Chứa các user
                         fragment = new UserFragment();
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
+                        //Profile cá nhân
                         fragment = new ProfileFragment();
                         loadFragment(fragment);
                         return true;
                     case R.id.navigation_setting:
+                        //Tạo phòng họp
                         fragment = new MeetingFragment();
                         loadFragment(fragment);
                         return true;
@@ -106,12 +110,10 @@ public class MainChatAppActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 flag =1;
-                Log.d("TTT","3");
                 status("offline");
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MainChatAppActivity.this,MainActivity.class);
                 startActivity(intent);
-                Log.d("TTT","4");
                 //finish();
             }
         });
@@ -141,7 +143,6 @@ public class MainChatAppActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(MainChatAppActivity.this,MainActivity.class);
                         startActivity(intent);
-                        Log.d("TTT","4");
                         break;
                 }
 

@@ -1,8 +1,9 @@
 package net.jitsi.sdktest.Model;
 
+//Dùng để lưu tin nhắn cuối cùng , với thời gian được lưu
 public class ChatList {
-    public String id;
-    public String time;
+    public String id;       //Id
+    public String time;     //Thời gian tin nhắn
 
     public ChatList(String id,String time) {
         this.id = id;

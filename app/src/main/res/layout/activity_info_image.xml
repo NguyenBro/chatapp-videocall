@@ -43,13 +43,13 @@
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:scaleType="fitXY"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image_avatar"
+        android:layout_gravity="center_horizontal"
         android:contentDescription="TODO" />
 
     <ImageView

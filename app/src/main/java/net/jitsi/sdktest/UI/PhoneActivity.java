@@ -26,7 +26,7 @@ import net.jitsi.sdktest.R;
 import java.util.concurrent.TimeUnit;
 
 
-
+//Thay đổi số điện thoại thông tin cá nhân
 public class PhoneActivity extends AppCompatActivity {
 
     ImageView imgBack;
@@ -58,16 +58,14 @@ public class PhoneActivity extends AppCompatActivity {
         btnCountinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Xác nhân số điện thoại
                 if(edtPhone.getText().toString().equals("")){
-                    Toast.makeText(PhoneActivity.this, "Enter Phone", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhoneActivity.this, getResources().getString(R.string.enter_phone), Toast.LENGTH_SHORT).show();
                 }
                 else{
                     reference.child("phone").setValue("+84"+edtPhone.getText().toString());
                     finish();
-                    //VertifyPhone("+84"+edtPhone.getText().toString());
-//                    Intent intent = new Intent(PhoneActivity.this,EnterOTPActivity.class);
-//                    intent.putExtra("numberphone",edtPhone.getText().toString());
-//                    startActivity(intent);
+
 
                 }
 
@@ -75,6 +73,7 @@ public class PhoneActivity extends AppCompatActivity {
         });
     }
 
+    //Nhập code OTP
     private void VertifyPhone(String phone) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)

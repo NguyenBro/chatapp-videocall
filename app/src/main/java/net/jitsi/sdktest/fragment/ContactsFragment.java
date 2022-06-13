@@ -39,10 +39,10 @@ import java.util.ArrayList;
 public class ContactsFragment extends Fragment {
 
     private ContactsAdapter adapter;
-    private ArrayList<User> listUser;
+    private ArrayList<User> listUser;               //Danh sách các User
     ListView ltvContacts;
-    private ArrayList<String> numberPhone;
-    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private ArrayList<String> numberPhone;          //Mảng chứa số diện thoại trong danh bạ điện thoại
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;           //Hằng số dùng để đánh dấu khi thwujc hiện quyền độc danh bạ điện thoại
     public ContactsFragment() {
         // Required empty public constructor
     }
@@ -119,7 +119,7 @@ public class ContactsFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
         } else {
-            // Nếu Android Version >=6.0 thì thwujc hiện
+            // Nếu Android Version >=6.0 thì thực hiện
             getContactNames();
         }
     }
@@ -167,10 +167,14 @@ public class ContactsFragment extends Fragment {
                         phoneNo = phoneNo.replaceAll(" ", "");  //Xóa khoảng cách giữa các chữ số
                         char[] s = phoneNo.toCharArray();
                         if(Character.compare(s[0],'0')==0){
-                            phoneNo = "+84"+ phoneNo.substring(1,phoneNo.length()-1);           //Chuyển sang định dạng +84...
+                            phoneNo = "+84"+ phoneNo.substring(1,phoneNo.length());           //Chuyển sang định dạng +84...
                         }
-                        //Log.d("BBB"," name :" + phoneNo.trim() + " phone: "+ phoneNo + " " + phoneNo.length());
-                        numberPhone.add(phoneNo);
+                        //Log.d("BBB"," name :" + name + " phone: "+ phoneNo + " " + phoneNo.length());
+                        //Log.d("PHONE_SSS",phoneNo +" " + numberPhone.size() +"");
+                        if(!numberPhone.contains(phoneNo)){
+                            numberPhone.add(phoneNo);
+                        }
+
                     }
                     pCur.close();
                 }

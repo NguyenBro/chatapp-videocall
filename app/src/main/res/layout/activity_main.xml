@@ -67,14 +67,18 @@
 
     <EditText
         android:id="@+id/editTextMail_SignIn"
-        android:layout_width="362dp"
+        android:layout_width="match_parent"
         android:layout_height="67dp"
         android:layout_marginTop="308dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
         android:background="@drawable/custom_edittext_login"
         android:drawableStart="@drawable/ic_baseline_email_24"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/email"
+        android:textColorHint="#545454"
+        android:textColor="#050505"
         android:inputType="textPersonName"
         android:padding="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +88,10 @@
 
     <Button
         android:id="@+id/buttonSignIn"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_button_login"
         android:text="@string/sign_in2"
@@ -99,9 +105,9 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="6dp"
         android:text="@string/don_t_have_an_account"
         android:textColor="@color/purple"
@@ -111,14 +117,17 @@
 
     <TextView
         android:id="@+id/textViewSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
         android:text="@string/sign_up"
         android:textColor="@color/purple"
+        android:layout_marginEnd="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
 
@@ -137,8 +146,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="#050505"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textColorHint="#545454"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextMail_SignIn"
@@ -146,7 +159,7 @@
 
         <EditText
             android:id="@+id/editTextPassword_SignIn"
-            android:layout_width="361dp"
+            android:layout_width="match_parent"
             android:layout_height="64dp"
             android:background="@drawable/custom_edittext_login"
             android:drawableStart="@drawable/ic_baseline_lock_24"
@@ -155,9 +168,12 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="15sp"
+            android:textColor="#050505"
+            android:textColorHint="#545454"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextMail_SignIn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>

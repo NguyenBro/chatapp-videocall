@@ -16,7 +16,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="413dp"
+            android:layout_width="match_parent"
             android:layout_height="73dp"
             android:background="#025AF3"
             android:minHeight="?attr/actionBarSize"
@@ -48,7 +48,7 @@
 
                 <TextView
                     android:id="@+id/textViewName_Message"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="23dp"
@@ -61,9 +61,9 @@
                     android:id="@+id/imageViewMeeting"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="18dp"
                     android:layout_marginEnd="60dp"
-                    android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_baseline_video_call_white_24" />
 
                 <ImageView
@@ -85,14 +85,26 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleViewMessage"
-        android:layout_width="410dp"
-        android:layout_height="530dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_body"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_layout">
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constraint_body"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -136,7 +148,9 @@
             android:layout_toLeftOf="@id/imageViewSend"
             android:layout_toRightOf="@id/imageViewImage"
             android:drawablePadding="5dp"
-            android:hint="Type a message..." />
+            android:hint="Type a message..."
+            android:textColor="#050505"
+            android:textColorHint="#545454" />
 
         <ImageView
             android:id="@+id/imageViewSend"
@@ -151,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="332dp"
+            android:layout_toStartOf="@id/imageViewSend"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_baseline_highlight_off_red24" />
 
@@ -166,6 +180,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bar_layout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

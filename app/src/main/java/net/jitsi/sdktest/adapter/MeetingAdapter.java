@@ -16,6 +16,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+//Chứa các item liên quan đến, các cuộc họp (meeting) đã tham gia
 public class MeetingAdapter extends BaseAdapter {
     private Context context;
     private  int layout;

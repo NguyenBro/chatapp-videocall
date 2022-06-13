@@ -44,12 +44,12 @@ import timber.log.Timber;
 
 //Activity cho người gọi
 public class CallerActivity extends AppCompatActivity {
-    TextView txtName;
-    CircleImageView imageAvatar,imageDecline;
-    ImageView imageBack;
+    TextView txtName;               //Tên người nhận cuộc gọi
+    CircleImageView imageAvatar,imageDecline;       //Hình ảnh Avatar người nhận , Nút để hủy cuộc gọi
+    ImageView imageBack;                        //quay về màn hình trước
     FirebaseUser firebaseUser;
     DatabaseReference reference;
-    CountDownTimer time;
+    CountDownTimer time;                //Thời gian đổ chuông 30s
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

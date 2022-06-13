@@ -18,10 +18,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 //Tao Adapter cho Danh sách các người dùng có SDT sử dụng app
 public class ContactsAdapter extends BaseAdapter {
-    private Context context;
-    private  int layout;
-    private List<User> listUser;
-    public String userid;
+    private Context context;  //màn hình
+    private  int layout;        //chưa file layout xml
+    private List<User> listUser;       //Mảng chứa các User
+    public String userid;               //Id của User
 
     public ContactsAdapter(Context context, int layout, List<User> listImage) {
         this.context = context;
@@ -76,6 +76,8 @@ public class ContactsAdapter extends BaseAdapter {
         holder.txtPhone.setVisibility(View.VISIBLE);
         holder.txtName.setText(user.getUsername());
         holder.txtPhone.setText(user.getPhone());
+
+        //Load Link Avatar và thêm vài ImageView
         if(user.getImageURL().equals("default")){
             holder.imgAvatar.setImageResource(R.drawable.image_avatar);
         }

@@ -38,6 +38,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/find"
+        android:textColorHint="#565656"
         android:drawablePadding="5dp"
         android:textColor="@color/black"
         android:drawableStart="@drawable/ic_baseline_search_24"

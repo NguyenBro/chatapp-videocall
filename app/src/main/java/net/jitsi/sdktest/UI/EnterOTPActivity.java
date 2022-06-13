@@ -28,11 +28,11 @@ import net.jitsi.sdktest.R;
 //Nhập mã OTP khi xác nhận số điện thoại
 
 public class EnterOTPActivity extends AppCompatActivity {
-    ImageView imgBack;
-    Button btnCheck;
-    EditText edtOTP;
+    ImageView imgBack;              //Nút Back về màn hình trước
+    Button btnCheck;                //Nút xác nhận mã OTP
+    EditText edtOTP;                //Nhập OTP
     TextView txtPhone;
-    String vertifyId,numberPhone;
+    String vertifyId,numberPhone;       //mã otp xac nhận và số điện thoại người dùng
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
     DatabaseReference reference;

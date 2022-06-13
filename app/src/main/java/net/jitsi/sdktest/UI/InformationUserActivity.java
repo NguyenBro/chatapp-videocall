@@ -24,9 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InformationUserActivity extends AppCompatActivity {
 
-    CircleImageView image_profile;
-    TextView username,email,phone,birth,gender,home,local;
-    DatabaseReference reference;
+    CircleImageView image_profile;              //Hình ảnh
+    TextView username,email,phone,birth,gender,home,local;      //Các thông tin liên quan
+    DatabaseReference reference;                //Lấy thông tin từ database
     FirebaseUser fuser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

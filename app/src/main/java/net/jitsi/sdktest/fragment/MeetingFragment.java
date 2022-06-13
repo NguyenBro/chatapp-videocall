@@ -59,9 +59,9 @@ public class MeetingFragment extends Fragment {
             onBroadcastReceived(intent);
         }
     };
-    View view;
-    EditText edtJoin;
-    Button btnJoin, btnCreateRoom;
+    View view;                  //View Bao Quanh Các controll khác
+    EditText edtJoin;           //Edit text nhập mã tham gia phòng họp
+    Button btnJoin, btnCreateRoom;      //Các Button xử lý, Button tthamm gia cuộc họp có sẵn và Button tạo phòng họp
     ListView ltvMeeting;
     private MeetingAdapter adapter;
     private ArrayList<Meeting> listMeeting;
@@ -150,13 +150,6 @@ public class MeetingFragment extends Fragment {
     private void registerForBroadcastMessages() {
         IntentFilter intentFilter = new IntentFilter();
 
-        /* This registers for every possible event sent from JitsiMeetSDK
-           If only some of the events are needed, the for loop can be replaced
-           with individual statements:
-           ex:  intentFilter.addAction(BroadcastEvent.Type.AUDIO_MUTED_CHANGED.getAction());
-                intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
-                ... other events
-         */
         for (BroadcastEvent.Type type : BroadcastEvent.Type.values()) {
             intentFilter.addAction(type.getAction());
         }

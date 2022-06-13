@@ -16,7 +16,7 @@ import net.jitsi.sdktest.UI.MessageActivity;
 import java.util.List;
 
 
-
+//Hiện thị từng Video trong danh sách tin nhắn
 public class VideoAdapter extends BaseAdapter {
     private Context context;
     private  int layout;

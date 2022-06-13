@@ -35,10 +35,10 @@ import java.util.ArrayList;
 public class FriendFragment extends Fragment {
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView;          //Danh sách hiện thị
     private UserAdapter adapter;
     private ArrayList<User> listUser;
-    EditText search_user;
+    EditText search_user;                       //Edit Text để search user
     public FriendFragment() {
         // Required empty public constructor
     }
@@ -55,6 +55,8 @@ public class FriendFragment extends Fragment {
         listUser =new ArrayList<>();
         addUser();
         search_user = view.findViewById(R.id.editTextSearchUser);
+
+        //Sự kiện khi edit Text thay đổi == > Thực hiện search
         search_user.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -73,7 +75,7 @@ public class FriendFragment extends Fragment {
         });
         return view;
     }
-
+    //Hàm search user
     private void searchUsers(String s) {
         FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com").getReference("Users").orderByChild("search").startAt(s).endAt(s+"\uf8ff");
@@ -102,6 +104,7 @@ public class FriendFragment extends Fragment {
         });
     }
 
+    //Hiện thị tất cả User khi ta chưa search ( chưa nhập vào editText)
     private void addUser() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com").getReference("Users");
@@ -110,23 +113,16 @@ public class FriendFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (search_user.getText().toString().equals("")) {
                     listUser.clear();
-                    //listUser.add(new User("11", "default", "default", "default", "default"));
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Log.d("AAA", "a");
                         User user = data.getValue(User.class);
                         Log.d("AAA", user.getUsername());
 
-//                    listUser.add(user);
-//                    listUser.add(user);
                         if (!user.getId().equals(firebaseUser.getUid())) {
                             listUser.add(user);
 
                         }
-                        //Log.d("AAA", user.getId());
-                        //Log.d("AAA", firebaseUser.getUid());
-                        //Log.d("AAA", listUser.size() + "" + listUser.get(0).getUsername());
                     }
-//                Log.d("AAA",listUser.size()+""+listUser.get(0).getUsername());
                     adapter = new UserAdapter(getActivity(), listUser, false);
                     recyclerView.setAdapter(adapter);
                 }

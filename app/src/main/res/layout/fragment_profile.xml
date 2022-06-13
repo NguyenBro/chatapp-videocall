@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragment.ProfileFragment">
 
     <androidx.cardview.widget.CardView
@@ -11,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="50dp"
+        android:background="@color/white"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -46,6 +49,13 @@
             android:text="UserName"
             android:textSize="20sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="180dp"
+
+            />
+
 
     </androidx.cardview.widget.CardView>
 
@@ -66,6 +76,7 @@
         android:text="Email:"
         android:gravity="center"
         android:textSize="20sp"
+        android:textColor="#050505"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toEndOf="@+id/imageViewMail"
@@ -90,6 +101,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/phone"
+        android:textColor="#050505"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewPhone"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -124,6 +136,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/birthdate"
+        android:textColor="#050505"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -147,6 +160,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/gender"
+        android:textColor="#050505"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewGender"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -171,6 +185,7 @@
         android:gravity="center"
         android:text="@string/current_add"
         android:textSize="20sp"
+        android:textColor="#050505"
         app:layout_constraintStart_toEndOf="@+id/imageViewHome"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -182,6 +197,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/home"
+        android:textColor="#050505"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewLocal"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -53,15 +54,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
 
-    CircleImageView image_profile;
+    CircleImageView image_profile;          //Lưu hình ảnh Avatar
     ImageView imgaddPhone;
-    TextView username,email,phone,birth,gender,home,local;
-    DatabaseReference reference;
+    TextView username,email,phone,birth,gender,home,local;      //Text View hiện thị thông tin
+    DatabaseReference reference;                                //Lấy data từ Firebase
     FirebaseUser fuser;
-    StorageReference storageReference;
-    private static final int IMAGE_REQUEST =1;
-    private Uri imageUri;
-    private StorageTask uploadTask;
+    StorageReference storageReference;              //Dùng để lưu Hình ảnh
+    private static final int IMAGE_REQUEST =1;      //Hằng số đánh dấu việc chọn hình ảnh từ folder của điện thoại
+    private Uri imageUri;                           //uri hình ảnh
+    private StorageTask uploadTask;                 //Thực hiện upload hình ảnh lên firrebase
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,7 +74,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=  inflater.inflate(R.layout.fragment_profile, container, false);
-
+        //Ánh xạ
         image_profile = view.findViewById(R.id.profile_image_user);
         username = view.findViewById(R.id.username_profile);
         email = view.findViewById(R.id.textViewMail_Profile);
@@ -194,10 +195,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Đến Từ");
+                txt.setText(getResources().getString(R.string.current_add));
+                edt.setHint(getResources().getString(R.string.current_add));
+                edt.setHintTextColor(Color.GRAY);
                 if(!local.getText().toString().equals("default")) {
                     edt.setText(local.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -230,10 +234,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Sống Tại");
+                txt.setText(getResources().getString(R.string.home));
+                edt.setHint(getResources().getString(R.string.home));
+                edt.setHintTextColor(Color.GRAY);
                 if(!home.getText().toString().equals("default")) {
                     edt.setText(home.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -265,10 +272,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Giới Tính");
+                txt.setText(getResources().getString(R.string.gender));
+                edt.setHint(getResources().getString(R.string.gender));
+                edt.setHintTextColor(Color.GRAY);
                 if(!gender.getText().toString().equals("default")) {
                     edt.setText(gender.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -300,10 +310,13 @@ public class ProfileFragment extends Fragment {
                 EditText edt = dialog.findViewById(R.id.editTextBody);
                 Button btnClose = dialog.findViewById(R.id.buttonClose);
                 Button btnSave =dialog.findViewById(R.id.buttonSave);
-                txt.setText("Ngày Sinh");
+                txt.setText(getResources().getString(R.string.birthdate));
+                edt.setHint(getResources().getString(R.string.birthdate));
+                edt.setHintTextColor(Color.GRAY);
                 if(!birth.getText().toString().equals("default")) {
                     edt.setText(birth.getText().toString());
                 }
+
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -361,6 +374,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
+                        //Nếu upload thành công thì thực hiện
                         Uri downloadUri =task.getResult();
                         String mUri = downloadUri.toString();
 

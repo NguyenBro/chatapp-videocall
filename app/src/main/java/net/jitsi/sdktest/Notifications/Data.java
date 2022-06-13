@@ -1,11 +1,12 @@
 package net.jitsi.sdktest.Notifications;
 
+//Thông tin thông báo được gửi
 public class Data {
-    private  String user;
-    private int icon;
-    private String body;
-    private String title;
-    private String sented;
+    private  String user;       //Id người nhận thông báo
+    private int icon;           //Iocn cho thông báo
+    private String body;           //Nội dung thông báo
+    private String title;       //Tiêu đề của thông báo
+    private String sented;      //Người đã gửi tin nhắn
 
     public Data(String user, int icon, String body, String title, String sented) {
         this.user = user;

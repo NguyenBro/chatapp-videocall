@@ -52,23 +52,23 @@ public class VideoFileFragment extends Fragment {
         String userid = MessageActivity.userid;
         adapter =new VideoAdapter(getContext(),R.layout.item_video,arrayVideo);
 
+        //Lấy vị trí trên firebase mà ta đã lưu hoặc sẽ lưu acsc Video
         if(firebaseUser.getUid().compareTo(userid) > 0){
             storage = FirebaseStorage.getInstance("gs://chatapp-videocall.appspot.com").getReference("message_"+firebaseUser.getUid()+"_"+userid).child("video");
         }
         else{
             storage = FirebaseStorage.getInstance("gs://chatapp-videocall.appspot.com").getReference("message_"+userid+"_"+firebaseUser.getUid()).child("video");
         }
+        //Duyệt danh sách các Video đã lấy được
         storage.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
             public void onSuccess(ListResult listResult) {
-                //Toast.makeText(MessageActivity.this, listResult., Toast.LENGTH_SHORT).show();
-//                for (StorageReference item : listResult.getItems())
                 for (StorageReference item : listResult.getItems()) {
                     item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             // adding the url in the arraylist
-                            Log.e("zzz1",uri.toString());
+                            //Log.e("zzz1",uri.toString());
                             arrayVideo.add(uri.toString());
 
                         }

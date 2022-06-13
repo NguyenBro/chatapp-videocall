@@ -1,5 +1,6 @@
 package net.jitsi.sdktest.Notifications;
 
+//Lưu mã token
 public class Token {
     private  String token;
 

@@ -17,11 +17,11 @@ import net.jitsi.sdktest.UI.InfoImageActivity;
 import java.util.List;
 
 
-
+//Chứa Item Hình ảnh, (xem danh sách hình ảnh )
 public class ImageFileAdapter extends BaseAdapter {
     private Context context;
     private  int layout;
-    private List<ImageFile> listImage;
+    private List<ImageFile> listImage;          //Mảng chứa các hình ảnh
 
     public ImageFileAdapter(Context context, int layout, List<ImageFile> listImage) {
         this.context = context;
@@ -67,8 +67,10 @@ public class ImageFileAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         ImageFile image =listImage.get(i);
+        //Load hình ảnh từ Uri
         Picasso.get().load(image.getImageUrl()).into(holder.imgImage);
 
+        //Click vào Hình Ảnh ==> Chuyển đến màn hình cụ thể hơn cho Tấm hình đó
         holder.imgImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
