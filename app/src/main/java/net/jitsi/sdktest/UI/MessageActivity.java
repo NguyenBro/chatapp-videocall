@@ -340,6 +340,7 @@ public class MessageActivity extends AppCompatActivity {
     }
     //==========================================================================================
 
+    // Hiện menu tin nhắn
     private void showPopupMenu(){
         PopupMenu popupMenu =new PopupMenu(MessageActivity.this,imgInfoUser);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
@@ -371,6 +372,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
+    //Hiện menu để chọn file
     private void showPopupMenuSendFile(){
         PopupMenu popupMenu =new PopupMenu(MessageActivity.this,imgImage);
         popupMenu.getMenuInflater().inflate(R.menu.context_menu_send_file,popupMenu.getMenu());
@@ -399,7 +401,6 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         popupMenu.show();
-
 
     }
 
@@ -567,7 +568,8 @@ public class MessageActivity extends AppCompatActivity {
 
         //Log.d("TIME",java.time.LocalDate.now().toString() + java.time.LocalTime.now().toString());
 
-        //=======
+        //Bắt sự kiện gửi tin nhắn đầu tiên hoặc sau này
+        // Thêm hoặc cập nhật tin nhắn cho người nhận
         DatabaseReference chatRef = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/")
                 .getReference("Chatlist").child(firebaseUser.getUid()).child(userid);
 
@@ -596,6 +598,7 @@ public class MessageActivity extends AppCompatActivity {
 
         //==========
         //Lưu Usser vào danh sách lịch sử nhắn tin == > Để hiện thị
+        // Thêm hoặc cập nhật tin nhắn cho người gửi
         DatabaseReference chatReff = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/")
                 .getReference("Chatlist").child(userid).child(firebaseUser.getUid());
 
@@ -744,14 +747,6 @@ public class MessageActivity extends AppCompatActivity {
     //==================================Nhận lại Resquest khi mở camera hoặc file, video
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if(requestCode==REQUEST_CODE_CAMERA && grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            startActivityForResult(intent,REQUEST_CODE_CAMERA);
-//        }
-//        else{
-//            Toast.makeText(this, "Lỗi Camera", Toast.LENGTH_SHORT).show();
-//        }
-
         switch (requestCode) {
             case RequestPermissionCode:
                 if (grantResults.length > 0) {
@@ -817,11 +812,6 @@ public class MessageActivity extends AppCompatActivity {
             imgCancel.setVisibility(View.VISIBLE);
             edtSend.setText(getNameFile(data.getData().getLastPathSegment()));
             edtSend.setFocusable(false);
-
-//            Uri name = data.getData();
-//            Toast.makeText(this, name.getLastPathSegment(), Toast.LENGTH_SHORT).show();
-//            Log.d("BBB",name.getLastPathSegment());
-//            Log.d("BBB",getNameFile(name.getLastPathSegment()));
         }
 
         if(requestCode ==REQUEST_CODE_VIDEO && resultCode==RESULT_OK && data!=null){
