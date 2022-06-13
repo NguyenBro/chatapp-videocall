@@ -39,10 +39,10 @@ import java.util.ArrayList;
 public class ContactsFragment extends Fragment {
 
     private ContactsAdapter adapter;
-    private ArrayList<User> listUser;
+    private ArrayList<User> listUser;               //Danh sách các User
     ListView ltvContacts;
-    private ArrayList<String> numberPhone;
-    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private ArrayList<String> numberPhone;          //Mảng chứa số diện thoại trong danh bạ điện thoại
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;           //Hằng số dùng để đánh dấu khi thwujc hiện quyền độc danh bạ điện thoại
     public ContactsFragment() {
         // Required empty public constructor
     }
@@ -119,7 +119,7 @@ public class ContactsFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
         } else {
-            // Nếu Android Version >=6.0 thì thwujc hiện
+            // Nếu Android Version >=6.0 thì thực hiện
             getContactNames();
         }
     }

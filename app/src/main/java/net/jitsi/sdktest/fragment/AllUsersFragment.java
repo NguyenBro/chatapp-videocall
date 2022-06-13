@@ -33,10 +33,10 @@ import java.util.ArrayList;
 
 public class AllUsersFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private UserAdapter adapter;
-    private ArrayList<User> listUser;
-    EditText search_user;
+    private RecyclerView recyclerView;          //Hiện thị danh sách
+    private UserAdapter adapter;                //Adapter Cho từng User
+    private ArrayList<User> listUser;           //Mảng chứa các User
+    EditText search_user;                       //Edit text được ánh xạ từ layout
     public AllUsersFragment() {
         // Required empty public constructor
     }
@@ -110,6 +110,7 @@ public class AllUsersFragment extends Fragment {
     private void addUser() {
         //Gọi tới firebase
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //Lấy Tất cả User trên firebase
         DatabaseReference reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com").getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override

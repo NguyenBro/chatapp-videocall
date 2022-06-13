@@ -54,15 +54,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
 
-    CircleImageView image_profile;
+    CircleImageView image_profile;          //Lưu hình ảnh Avatar
     ImageView imgaddPhone;
-    TextView username,email,phone,birth,gender,home,local;
-    DatabaseReference reference;
+    TextView username,email,phone,birth,gender,home,local;      //Text View hiện thị thông tin
+    DatabaseReference reference;                                //Lấy data từ Firebase
     FirebaseUser fuser;
-    StorageReference storageReference;
-    private static final int IMAGE_REQUEST =1;
-    private Uri imageUri;
-    private StorageTask uploadTask;
+    StorageReference storageReference;              //Dùng để lưu Hình ảnh
+    private static final int IMAGE_REQUEST =1;      //Hằng số đánh dấu việc chọn hình ảnh từ folder của điện thoại
+    private Uri imageUri;                           //uri hình ảnh
+    private StorageTask uploadTask;                 //Thực hiện upload hình ảnh lên firrebase
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=  inflater.inflate(R.layout.fragment_profile, container, false);
-
+        //Ánh xạ
         image_profile = view.findViewById(R.id.profile_image_user);
         username = view.findViewById(R.id.username_profile);
         email = view.findViewById(R.id.textViewMail_Profile);
@@ -374,6 +374,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
+                        //Nếu upload thành công thì thực hiện
                         Uri downloadUri =task.getResult();
                         String mUri = downloadUri.toString();
 

@@ -10,6 +10,7 @@ import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
 
+//Hỗ trợ cho việc gửi thông báo trên hệ điều hành android 8.0
 public class OreoNotification extends ContextWrapper {
 
     private static final String CHANNEL_ID ="net.jitsi.sdktest";

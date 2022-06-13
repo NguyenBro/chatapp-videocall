@@ -32,9 +32,9 @@ import java.util.ArrayList;
 
 public class ImageFileFragment extends Fragment {
 
-    GridView gridViewImage;
-    ArrayList<ImageFile> arrayImage;
-    ImageFileAdapter adapter;
+    GridView gridViewImage;             //GirdView hiện thị danh sách
+    ArrayList<ImageFile> arrayImage;       //Mảng
+    ImageFileAdapter adapter;               //Adapter
     public ImageFileFragment() {
         // Required empty public constructor
     }
@@ -49,8 +49,8 @@ public class ImageFileFragment extends Fragment {
         String userid = MessageActivity.userid;
 
         //Khởi tạo các biến kết nối tới firebasse
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        StorageReference storage;
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();        //user đăng nhập
+        StorageReference storage;                                                       //Các file đã lưu
         adapter =new ImageFileAdapter(getContext(),R.layout.item_image,arrayImage);
 
         //Tạo Storage tới firebase , nơi lưu trữ hình ảnh giữa 2 Usser

@@ -27,22 +27,18 @@ import com.google.firebase.messaging.RemoteMessage;
 import net.jitsi.sdktest.R;
 import net.jitsi.sdktest.UI.MessageActivity;
 
-
+//Xử lý FirebaseMessagingService để thực hiện gửi thông báo khi có tin nhắn mới
 public class MyFirebaseIdService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-//        String refreshToken = FirebaseMessaging.getInstance().getToken().getResult();
-//        if (refreshToken != null) {
-//            updateToken(refreshToken);
-//        }
         updateToken(s);
     }
 
     private void updateToken(String refreshToken) {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
+            //Update và lưu Token ==> Dùng mã này để biết được việc gửi thông báo
             DatabaseReference reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/").getReference("Tokens");
             Token token = new Token(refreshToken);
             reference.child(firebaseUser.getUid()).setValue(token);
@@ -52,6 +48,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
+        //Lưu các thông tin khi gửi thông báo
         String sented = message.getData().get("sented");
         String user = message.getData().get("user");
 
@@ -62,17 +59,17 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
             MediaPlayer music = MediaPlayer.create(getApplicationContext(), R.raw.music);
             music.start();
             if(!currentUser.equals(user)) {
+                //Kiểm tra phiên bản Android
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Log.d("CCC", "oreo");
                     sendOreoNotification(message);
                 } else {
-                    Log.d("CCC", "no oreo");
                     sendNotification(message);
                 }
             }
         }
     }
 
+    //Gửi thông báo với phiên bản Android >=8.0
     private void sendOreoNotification(RemoteMessage message){
         String user= message.getData().get("user");
         String icon = message.getData().get("icon");
@@ -100,6 +97,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
         oreoNotification.getManager().notify(i,builder.build());
     }
 
+    //Gửi thông báo với các phiên bản Android <8.0
     private void sendNotification(RemoteMessage message){
         String user= message.getData().get("user");
         String icon = message.getData().get("icon");

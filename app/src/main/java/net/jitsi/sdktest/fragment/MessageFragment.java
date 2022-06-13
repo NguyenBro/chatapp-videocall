@@ -38,12 +38,12 @@ import java.util.List;
 public class MessageFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    private RecyclerView recyclerView,recyclerViewStatus;
+    private RecyclerView recyclerView,recyclerViewStatus;           //Danh sách tin nhắn VÀ danh sách các người dùng đang online
     private UserAdapter userAdapter;
     private UserStatusAdapter userStatusAdapter;
     private List<User> mUsers,mStatusUsers;
-    FirebaseUser fuser;
-    DatabaseReference reference;
+    FirebaseUser fuser;                         //Lấu User đang đăng nhập
+    DatabaseReference reference;                //Lấy dữ liệu Firebase
     private List<ChatList>  usersList;
 
     public MessageFragment() {
@@ -140,6 +140,7 @@ public class MessageFragment extends Fragment {
         return true;
     }
 
+    //Danh sách Các User đã tham gia nhắn tin
     private void chatList(){
         mUsers = new ArrayList<>();
         reference =FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com").getReference("Users");
@@ -147,15 +148,6 @@ public class MessageFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
-//                for(DataSnapshot data :snapshot.getChildren()){
-//                    User user =data.getValue(User.class);
-//                    for(ChatList chatList :usersList){
-//                        if(user.getId().equals(chatList.getId())){
-//                            mUsers.add(user);
-//                        }
-//                    }
-//                }
-
                 for(ChatList chatList : usersList){
                     for(DataSnapshot data :snapshot.getChildren()){
                         User user =data.getValue(User.class);
@@ -186,6 +178,7 @@ public class MessageFragment extends Fragment {
 
     }
 
+    //Hiện thị các danh sách trạng thái online của bạn bè
     private void setRecyclerViewStatus(){
         mStatusUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com").getReference("Users");

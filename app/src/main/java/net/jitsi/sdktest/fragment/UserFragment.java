@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class UserFragment extends Fragment {
 
-    TabLayout mTabLayout;
-    ViewPager2 mViewPage;
+    TabLayout mTabLayout;       //TabLayout hiện thị Contacts và ALL User
+    ViewPager2 mViewPage;       //View Page để chứa nội dung của từng phần trên TabLayout
     ArrayList<String> tabLayoutList;
     public UserFragment() {
         // Required empty public constructor

@@ -33,9 +33,9 @@ public class FileFragment extends ListFragment {
 
     ArrayList<File> arrayFile;
     FileAdapter adapter;
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    StorageReference storage;
-    String userid = MessageActivity.userid;
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();        //Phiên thức đăng nhập từ Firebase, lấy thông tin người dùng đó
+    StorageReference storage;               //Nơi lưu trữ hoặc để lấy các File , Hình ảnh, Video từ Firebase
+    String userid = MessageActivity.userid;         //Lấy Id của người nhắn tin
     public FileFragment() {
         // Required empty public constructor
     }
