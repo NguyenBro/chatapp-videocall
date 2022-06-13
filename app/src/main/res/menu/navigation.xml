@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_messeger"
         android:icon="@drawable/ic_baseline_message_24"
-        android:title="@string/messeger"
+        android:title="@string/messager"
         app:showAsAction="always"
         />
 

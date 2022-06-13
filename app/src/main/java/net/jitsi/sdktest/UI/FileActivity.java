@@ -20,8 +20,8 @@ import java.util.ArrayList;
 //Chưa tabLayout bao gồm : Image,Video, File
 
 public class FileActivity extends AppCompatActivity {
-    TabLayout mTabLayout;
-    ViewPager2 mViewPage;
+    TabLayout mTabLayout;               //TabLayout gồm Image, Video , File
+    ViewPager2 mViewPage;               //Chứa nội dung của từng item tablayout
     ArrayList<String> tabLayoutList;
     ImageView imgBack;
     @Override
@@ -43,7 +43,7 @@ public class FileActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),getLifecycle());
         mViewPage.setAdapter(viewPagerAdapter);
 
-
+        //Xét các cài đặt cho tablayout và ViewPage
         new TabLayoutMediator(mTabLayout, mViewPage,
                 (tab, position) -> tab.setText(tabLayoutList.get(position))
         ).attach();

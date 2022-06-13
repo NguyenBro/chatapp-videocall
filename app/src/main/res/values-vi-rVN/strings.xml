@@ -41,7 +41,7 @@
     <string name="logout">Đăng xuất</string>
     <string name="information">"Thông tin "</string>
     <string name="file">Tập tin</string>
-    <string name="messeger">Tin nhắn</string>
+    <string name="messager">Tin nhắn</string>
     <string name="user">Bạn bè</string>
     <string name="me">Trang cá nhân</string>
     <string name="meeting1">Cuộc họp</string>
@@ -54,4 +54,13 @@
     <string name="error_image">Lỗi Lưu Ảnh</string>
     <string name="start_audio">Bắt đầu ghi âm</string>
     <string name="done">Hoàn thành</string>
+    <string name="up_success">Đăng kí thành công</string>
+    <string name="failed_6">Không thành công, Mật khẩu có ít nhất 6 ký tự</string>
+    <string name="failed_email">Không thành công, email không hợp lệ HOẶC Email đã tồn tại</string>
+    <string name="success_in">Thành công</string>
+    <string name="email_password">Email hoặc mật khẩu không đúng</string>
+    <string name="fill_name">Vui lòng điền đầy đủ thông tin</string>
+    <string name="failed">Lỗi</string>
+    <string name="check_name">Hãy kiểm tra email :</string>
+    <string name="enter_phone">Nhập SĐT</string>
 </resources>

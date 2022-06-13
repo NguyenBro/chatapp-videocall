@@ -16,12 +16,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.jitsi.sdktest.R;
-
+//Reset password
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     TextView txtSignUp,txtSignIn;
-    EditText edtEmail;
-    Button btnReset;
+    EditText edtEmail;      //Điền Gmail
+    Button btnReset;        //Button xác nhận reset pass
     private FirebaseAuth auth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +63,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     //Thwujc hiện gửi về gmail đã nhập
     private void ResetPassword(){
         String emailAddress = edtEmail.getText().toString().trim();
-
+        //Hàm hỗ trợ của firebase
         auth.sendPasswordResetEmail(emailAddress)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ForgotPasswordActivity.this, "please check your email "+emailAddress, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.check_name) +emailAddress, Toast.LENGTH_SHORT).show();
                             edtEmail.setText("");
                         }
                         else{
-                            Toast.makeText(ForgotPasswordActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

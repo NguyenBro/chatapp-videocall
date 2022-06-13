@@ -36,9 +36,9 @@ public class InfoImageActivity extends AppCompatActivity {
     TextView txtName,txtStatus;
     String userid = MessageActivity.userid;
     public static String start ="";
-    String url;
+    String url;                                             //Link ảnh trên firebase
     DatabaseReference reference;
-    private ScaleGestureDetector scaleGestureDetector;
+    private ScaleGestureDetector scaleGestureDetector;      //Dùng để zoom ảnh
     private float mScaleFactor = 1.0f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +86,7 @@ public class InfoImageActivity extends AppCompatActivity {
         imgBody.post(new Runnable() {
             @Override
             public void run() {
-//                int width = imgBody.getMeasuredWidth();
-//                int height = imgBody.getMeasuredHeight();
-//                Toast.makeText(InfoImageActivity.this, width +" "+ height +" ", Toast.LENGTH_SHORT).show();
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                params.weight = 1.0f;
-//                params.gravity = Gravity.TOP;
-//                imgBody.setLayoutParams(params);
+
 
             }
         });
@@ -106,6 +100,7 @@ public class InfoImageActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    //Zoom out - zoom in hình ảnh
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {

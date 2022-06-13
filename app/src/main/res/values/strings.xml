@@ -53,7 +53,7 @@
     <string name="send">Send</string>
     <string name="logout">Logout</string>
     <string name="information">Information</string>
-    <string name="messeger">Messeger</string>
+    <string name="messager">Messager</string>
     <string name="user">User</string>
     <string name="me">Profile</string>
     <string name="meeting1">Meeting</string>
@@ -66,6 +66,16 @@
     <string name="error_image">Error Save image</string>
     <string name="start_audio">Recording started</string>
     <string name="done">Done</string>
+    <string name="up_success">Sign Up Success</string>
+    <string name="failed_6">Failed , Password at least 6 characters</string>
+    <string name="failed_email">Failed , email is not valid OR Email already exists</string>
+    <string name="success_in">Successful</string>
+    <string name="email_password">Email OR Password is not correct</string>
+    <string name="fill_name">Please fill out the information completely</string>
+    <string name="failed">Failed</string>
+    <string name="check_name">please check your email  :</string>
+    <string name="enter_phone">Enter Phone</string>
+
 
 
 </resources>

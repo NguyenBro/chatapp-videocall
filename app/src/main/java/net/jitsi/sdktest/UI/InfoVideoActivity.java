@@ -29,12 +29,12 @@ import net.jitsi.sdktest.R;
 import java.util.Calendar;
 
 
-
+//Xem Video
 public class InfoVideoActivity extends AppCompatActivity {
 
     ImageView imgBack,imgMore;
-    VideoView video;
-    MediaController mediaController;
+    VideoView video;                        //Chạy video từ URI
+    MediaController mediaController;        //Hiện thị các điều kiển ,tua nhanh chậm ,dừng lại trên video
     TextView txtName,txtStatus;
     DatabaseReference reference;
     Uri linkVideo;
@@ -56,6 +56,7 @@ public class InfoVideoActivity extends AppCompatActivity {
         video.start();
 
         String userid = intent.getStringExtra("userid");
+        //Xet trạng thái hoạt động
         reference = FirebaseDatabase.getInstance("https://chatapp-videocall-default-rtdb.firebaseio.com/").getReference("Users").child(userid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +64,6 @@ public class InfoVideoActivity extends AppCompatActivity {
                 User user =snapshot.getValue(User.class);
                 txtName.setText(user.getUsername());
                 txtStatus.setText(user.getStatus());
-
             }
 
             @Override
@@ -99,11 +99,13 @@ public class InfoVideoActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.image_save:
+                        //Tải video
                         Toast.makeText(InfoVideoActivity.this, "Save", Toast.LENGTH_SHORT).show();
 //                        Uri uri = Uri.parse(url);
                         downloadFile(linkVideo);
                         break;
                     case R.id.image_send:
+                        //gửi video
                         Toast.makeText(InfoVideoActivity.this, "Send", Toast.LENGTH_SHORT).show();
                         break;
                 }

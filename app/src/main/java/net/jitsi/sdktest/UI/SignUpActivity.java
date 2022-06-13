@@ -23,7 +23,7 @@ import net.jitsi.sdktest.R;
 
 import java.util.HashMap;
 
-
+//Đăng kí tài khoản
 
 public class SignUpActivity extends AppCompatActivity {
     TextView txtSignIn,txtResetPass;
@@ -87,6 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                //Thông các thông tin cá nhân
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 String userid= firebaseUser.getUid();
                                 myRef.child(userid);
@@ -109,20 +110,20 @@ public class SignUpActivity extends AppCompatActivity {
                                 edtMail.setText("");
                                 edtPass.setText("");
                                 edtUser.setText("");
-                                Toast.makeText(SignUpActivity.this, "Sign Up Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, getResources().getString(R.string.up_success), Toast.LENGTH_SHORT).show();
                             } else {
                                 if(password.length() < 6) {
-                                    Toast.makeText(SignUpActivity.this, "Failed , Password at least 6 characters", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.failed_6), Toast.LENGTH_LONG).show();
                                 }
                                 else{
-                                    Toast.makeText(SignUpActivity.this, "Failed , email is not valid OR Email already exists", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.failed_email), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
                     });
         }
         else{
-            Toast.makeText(SignUpActivity.this, "Please fill out the information completely", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.fill_name), Toast.LENGTH_SHORT).show();
         }
     }
 

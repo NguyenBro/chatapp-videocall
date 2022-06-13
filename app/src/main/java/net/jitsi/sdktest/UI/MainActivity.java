@@ -30,7 +30,7 @@ import net.jitsi.sdktest.R;
 
 public class MainActivity extends AppCompatActivity {
     TextView txtSignUp,txtResetPass;
-    EditText edtMail,edtPass;
+    EditText edtMail,edtPass;       //Gồm Email và password
     Button btnSignIn;
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        //Kiểm tra đăng nhập , nếu đã có tài khoản thì k cần đăng nhập lại
         super.onStart();
         //Log.d("TTT","5");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,90 +65,10 @@ public class MainActivity extends AppCompatActivity {
         AnhXa();
         Event();
 
-        //showContacts();
-
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            getAllContacts();
-//        } else {
-//            requestPermission();
-//        }
-
-//        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
-//        while (phones.moveToNext())
-//        {
-//            String name=phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-//            String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//            Log.d("AAA", name + phoneNumber);
-//
-//        }
-//        phones.close();
-
 
 
     }
 
-
-
-    private void showContacts() {
-        // Check the SDK version and whether the permission is already granted or not.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
-            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
-        } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            getContactNames();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-
-        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted
-                showContacts();
-            } else {
-                Toast.makeText(this, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private void getContactNames(){
-        ContentResolver cr = getContentResolver();
-        // Get the Cursor of all the contacts
-        Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-
-        // Move the cursor to first. Also check whether the cursor is empty or not.
-        if (cursor.moveToFirst()) {
-            // Iterate through the cursor
-            do {
-                // Get the contacts name
-                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                @SuppressLint("Range") String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                if(Integer.parseInt(phone) >=1){
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
-                    while (pCur.moveToNext()) {
-                        @SuppressLint("Range") String phoneNo = pCur.getString(pCur.getColumnIndex(
-                                ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Log.d("AAA"," name :" + name + " phone: "+ phoneNo);
-                    }
-                    pCur.close();
-                }
-
-            } while (cursor.moveToNext());
-        }
-        // Close the curosor
-        cursor.close();
-
-    }
     private void AnhXa(){
 
         txtSignUp = findViewById(R.id.textViewSignUp);
@@ -189,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Successfull", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.success_in), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this,MainChatAppActivity.class));
                             //startActivity(new Intent(MainActivity.this,MainChatAppActivity.class));
                         } else {
-                            Toast.makeText(MainActivity.this, "Email OR Password is not correct", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.email_password), Toast.LENGTH_SHORT).show();
                             edtPass.setText("");
                         }
                     }

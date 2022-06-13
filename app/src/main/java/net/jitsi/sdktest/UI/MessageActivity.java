@@ -92,32 +92,32 @@ import retrofit2.Response;
 
 public class MessageActivity extends AppCompatActivity {
 
-    CircleImageView profile_image;
-    TextView username;
-    FirebaseUser firebaseUser;
-    DatabaseReference reference;
-    VideoView videoView;
+    CircleImageView profile_image;      //Avatar
+    TextView username;                  //Tên
+    FirebaseUser firebaseUser;          //Lấy tài khoản đang đăng nhập
+    DatabaseReference reference;        //Lấy các data liên quan từ firrebase
+    VideoView videoView;                //Video
     Intent intent;
-    ImageView imgSend,imgInfoUser,imgBack,imgCamera,imgImage,imgTest,imgCancel,imgAudio,imgMeeting;
-    EditText edtSend;
-    MessageAdapter messageAdapter;
-    List<Chat> mChat;
-    RecyclerView recyclerView;
+    ImageView imgSend,imgInfoUser,imgBack,imgCamera,imgImage,imgTest,imgCancel,imgAudio,imgMeeting;     //Một số image liên quan
+    EditText edtSend;                   //Gửi tin nhắn
+    MessageAdapter messageAdapter;      //Adapter
+    List<Chat> mChat;                   //Mảng các tin nhắn
+    RecyclerView recyclerView;          //Hiển thị danh sách tin nhắn
     ValueEventListener seenListener;
     public static String userid;
-    APIService apiService;
+    APIService apiService;              //API gửi thông báo khi nhận tin nhắn
     boolean notify = false;
     StorageReference storageReference,storageFile;
-    public static final int REQUEST_CODE_CAMERA=1911;
-    int REQUEST_FOLDER = 2222;
-    int REQUEST_CODE_FILE= 5555;
-    int REQUEST_CODE_VIDEO= 1234;
+    public static final int REQUEST_CODE_CAMERA=1911;       //Hằng số đánh dấu mở camera
+    int REQUEST_FOLDER = 2222;                              //Hằng số đánh dấu mở folder
+    int REQUEST_CODE_FILE= 5555;                            //Hằng số đánh dấu mở File
+    int REQUEST_CODE_VIDEO= 1234;                           //Hằng số đánh dấu mở Video
     private Uri imageUri;
-    String type="default";
-    MediaController mediaController;
+    String type="default";                                  //Các loại tin nhắn : text, image, video, file, audio
+    MediaController mediaController;                        //Hỗ trợ việc chạy video
     Intent dataIntent;
     String AudioSavePathInDevice = null;
-    MediaRecorder mediaRecorder ;
+    MediaRecorder mediaRecorder ;                              //Hỗ tợ việc chạy audio
     Random random ;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
@@ -200,9 +200,6 @@ public class MessageActivity extends AppCompatActivity {
                     Toast.makeText(MessageActivity.this, getResources().getString(R.string.cannot), Toast.LENGTH_SHORT).show();
                 }
                 edtSend.setText("");
-//                edtSend.requestFocus();
-//                edtSend.setEnabled(true);
-//                edtSend.setInputType(InputType.TYPE_CLASS_TEXT);
                 edtSend.setFocusableInTouchMode(true);
                 edtSend.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 imgCancel.setVisibility(View.GONE);
@@ -219,9 +216,6 @@ public class MessageActivity extends AppCompatActivity {
                 imgTest.setImageResource(0);
                 imgCancel.setVisibility(View.GONE);
                 type="default";
-//                edtSend.requestFocus();
-//                edtSend.setEnabled(true);
-//                edtSend.setInputType(InputType.TYPE_CLASS_TEXT);
                 edtSend.setFocusableInTouchMode(true);
                 edtSend.setText("");
             }
@@ -238,9 +232,6 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Xem thoogn tin
-//                Intent intent_info = new Intent(MessageActivity.this,InformationUserActivity.class);
-//                intent_info.putExtra("userid",userid);
-//                startActivity(intent_info);
                 showPopupMenu();
             }
         });
@@ -250,9 +241,6 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Lựa chọn file .image, video để gửi
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("image/*");
-//                startActivityForResult(intent,REQUEST_FOLDER);
                 showPopupMenuSendFile();
             }
         });
@@ -744,13 +732,6 @@ public class MessageActivity extends AppCompatActivity {
     //==================================Nhận lại Resquest khi mở camera hoặc file, video
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if(requestCode==REQUEST_CODE_CAMERA && grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            startActivityForResult(intent,REQUEST_CODE_CAMERA);
-//        }
-//        else{
-//            Toast.makeText(this, "Lỗi Camera", Toast.LENGTH_SHORT).show();
-//        }
 
         switch (requestCode) {
             case RequestPermissionCode:
@@ -818,10 +799,6 @@ public class MessageActivity extends AppCompatActivity {
             edtSend.setText(getNameFile(data.getData().getLastPathSegment()));
             edtSend.setFocusable(false);
 
-//            Uri name = data.getData();
-//            Toast.makeText(this, name.getLastPathSegment(), Toast.LENGTH_SHORT).show();
-//            Log.d("BBB",name.getLastPathSegment());
-//            Log.d("BBB",getNameFile(name.getLastPathSegment()));
         }
 
         if(requestCode ==REQUEST_CODE_VIDEO && resultCode==RESULT_OK && data!=null){

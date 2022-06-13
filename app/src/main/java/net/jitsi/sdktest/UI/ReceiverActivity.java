@@ -47,12 +47,12 @@ import timber.log.Timber;
 
 public class ReceiverActivity extends AppCompatActivity {
 
-    CircleImageView imageDecline,imageAccept,imageAvatar;
+    CircleImageView imageDecline,imageAccept,imageAvatar;       //Từ chối gọi, chấp nhận cuộc gọi và Avatar
     TextView txtName;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     String userid="";
-    MediaPlayer music ;
+    MediaPlayer music ;                 //Chạy nhạc chuông khi có người gọi
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -193,6 +193,7 @@ public class ReceiverActivity extends AppCompatActivity {
             }
         });
 
+        //Xử dụng Server của Jitsi - Meeting để tạo cuộc họp
         URL serverURL;
         try {
             // When using JaaS, replace "https://meet.jit.si" with the proper serverURL
@@ -204,11 +205,6 @@ public class ReceiverActivity extends AppCompatActivity {
         JitsiMeetConferenceOptions defaultOptions
                 = new JitsiMeetConferenceOptions.Builder()
                 .setServerURL(serverURL)
-                // When using JaaS, set the obtained JWT here
-                //.setToken("MyJWT")
-                // Different features flags can be set
-                // .setFeatureFlag("toolbox.enabled", false)
-                // .setFeatureFlag("filmstrip.enabled", false)
                 .setFeatureFlag("welcomepage.enabled", false)
                 .build();
         JitsiMeet.setDefaultConferenceOptions(defaultOptions);
@@ -240,13 +236,6 @@ public class ReceiverActivity extends AppCompatActivity {
     private void registerForBroadcastMessages() {
         IntentFilter intentFilter = new IntentFilter();
 
-        /* This registers for every possible event sent from JitsiMeetSDK
-           If only some of the events are needed, the for loop can be replaced
-           with individual statements:
-           ex:  intentFilter.addAction(BroadcastEvent.Type.AUDIO_MUTED_CHANGED.getAction());
-                intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
-                ... other events
-         */
         for (BroadcastEvent.Type type : BroadcastEvent.Type.values()) {
             intentFilter.addAction(type.getAction());
         }
