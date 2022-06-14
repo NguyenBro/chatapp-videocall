@@ -105,20 +105,22 @@ public class MainActivity extends AppCompatActivity {
     private void DangNhap(){
         String email = edtMail.getText().toString();
         String password = edtPass.getText().toString();
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, getResources().getString(R.string.success_in), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this,MainChatAppActivity.class));
-                            //startActivity(new Intent(MainActivity.this,MainChatAppActivity.class));
-                        } else {
-                            Toast.makeText(MainActivity.this, getResources().getString(R.string.email_password), Toast.LENGTH_SHORT).show();
-                            edtPass.setText("");
+        if(!email.equals("") && !password.equals("")) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, getResources().getString(R.string.success_in), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, MainChatAppActivity.class));
+                                //startActivity(new Intent(MainActivity.this,MainChatAppActivity.class));
+                            } else {
+                                Toast.makeText(MainActivity.this, getResources().getString(R.string.email_password), Toast.LENGTH_SHORT).show();
+                                edtPass.setText("");
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
 

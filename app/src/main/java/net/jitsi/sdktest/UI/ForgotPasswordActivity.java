@@ -63,19 +63,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     //Thwujc hiện gửi về gmail đã nhập
     private void ResetPassword(){
         String emailAddress = edtEmail.getText().toString().trim();
-        //Hàm hỗ trợ của firebase
-        auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.check_name) +emailAddress, Toast.LENGTH_SHORT).show();
-                            edtEmail.setText("");
+        if(!emailAddress.equals("")) {
+            //Hàm hỗ trợ của firebase
+            auth.sendPasswordResetEmail(emailAddress)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.check_name) + emailAddress, Toast.LENGTH_SHORT).show();
+                                edtEmail.setText("");
+                            } else {
+                                Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(ForgotPasswordActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+        }
     }
 }
