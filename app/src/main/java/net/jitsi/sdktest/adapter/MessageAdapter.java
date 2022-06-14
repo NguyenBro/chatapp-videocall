@@ -347,16 +347,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 if(chat.getType().equals("file")){
                     //Toast.makeText(context, "DownLoad", Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Download File");
-                    builder.setMessage("Do you want to download file ?");
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setTitle(context.getResources().getString(R.string.download_file));
+                    builder.setMessage(context.getResources().getString(R.string.do_you_want));
+                    builder.setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             context.downloadFile(Uri.parse(chat.getLink()),chat.getMessage());
                         }
                     });
 
-                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 

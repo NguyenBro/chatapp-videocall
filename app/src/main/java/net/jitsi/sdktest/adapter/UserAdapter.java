@@ -149,7 +149,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                         Chat chat = data.getValue(Chat.class);
 
                         if ((chat.getReceiver().equals(userid) && chat.getSender().equals(id))) {
-                            theLastMessage ="You: " + chat.getMessage();
+                            theLastMessage =context.getResources().getString(R.string.you)+ " :" + chat.getMessage();
                         }
                         else if((chat.getReceiver().equals(id) && chat.getSender().equals(userid))){
                             theLastMessage =chat.getMessage();

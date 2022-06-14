@@ -144,7 +144,7 @@ public class InfoImageActivity extends AppCompatActivity {
         DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri)
                 .setTitle("File Download-"+calendar.getTimeInMillis())
-                .setDescription("This is file from ChatApp")
+                .setDescription(getResources().getString(R.string.this_is_file))
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
         downloadManager.enqueue(request);
     }

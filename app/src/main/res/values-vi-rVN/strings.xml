@@ -63,4 +63,13 @@
     <string name="failed">Lỗi</string>
     <string name="check_name">Hãy kiểm tra email :</string>
     <string name="enter_phone">Nhập SĐT</string>
+    <string name="you">Bạn</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="download_file">Tải  File</string>
+    <string name="do_you_want">Bạn có muốn tải file này không ?</string>
+    <string name="this_is_file">File từ ứng dụng ChatApp</string>
+    <string name="until">Cho đến khi bạn cấp quyền, chúng tôi không thể hiển thị tên</string>
+    <string name="upload_in_preopress">Đang tải</string>
+    <string name="no_image_selected">Chưa chọn hình ảnh</string>
 </resources>

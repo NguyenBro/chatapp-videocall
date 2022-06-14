@@ -53,7 +53,7 @@
     <string name="send">Send</string>
     <string name="logout">Logout</string>
     <string name="information">Information</string>
-    <string name="messager">Messager</string>
+    <string name="messager">Message</string>
     <string name="user">User</string>
     <string name="me">Profile</string>
     <string name="meeting1">Meeting</string>
@@ -75,6 +75,15 @@
     <string name="failed">Failed</string>
     <string name="check_name">please check your email  :</string>
     <string name="enter_phone">Enter Phone</string>
+    <string name="you">You</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="download_file">Download File</string>
+    <string name="do_you_want">Do you want to download file ?</string>
+    <string name="this_is_file">This is file from ChatApp</string>
+    <string name="until">Until you grant the permission, we canot display the names</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="upload_in_preopress">Upload in preopress</string>
 
 
 

@@ -133,7 +133,7 @@ public class ContactsFragment extends Fragment {
                 // Permission is granted
                 showContacts();
             } else {
-                Toast.makeText(getContext(), "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.until), Toast.LENGTH_SHORT).show();
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
