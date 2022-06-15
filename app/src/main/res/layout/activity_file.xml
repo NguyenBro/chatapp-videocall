@@ -42,7 +42,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginTop="60dp"
         android:background="#FFFFFF"
@@ -73,7 +73,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPage"
-        android:layout_width="406dp"
+        android:layout_width="match_parent"
         android:layout_height="525dp"
         android:layout_marginTop="5dp"
         android:background="@color/white"
